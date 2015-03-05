@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <dmx>
-    <port>tty.usbserial-EN143965</port>
+    <port>tty.usbserial-EN160423</port>
 </dmx>
 <animation>
 	<name>animRandom.js</name>

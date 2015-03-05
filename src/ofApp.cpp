@@ -89,8 +89,18 @@ void ofApp::draw()
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-
+void ofApp::keyPressed(int key)
+{
+	if (mp_animation)
+	{
+		if (key == ' ')
+		{
+			bool reloadedScript = mp_animation->reloadScript();
+	 		OFAPPLOG->println(" - reloaded script "+ofToString(reloadedScript));
+			mp_animation->setGrid(&m_grid);
+			mp_animation->setup();
+		}
+	}
 }
 
 //--------------------------------------------------------------

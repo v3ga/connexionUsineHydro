@@ -6,6 +6,11 @@ function Grid(rows,cols)
 	for (var i=0;i<this.values.length;i++)
 		this.values[i]=0;
 
+	this.setPixelValue = function(index, value)
+	{
+		this.values[i] = value;
+	}
+
 	this.set = function(otherGrid, parameters)
 	{
 		if (otherGrid.values.length == this.values.length)
@@ -30,7 +35,10 @@ function Grid(rows,cols)
 		var nb = this.rows*this.cols;
 		for (var i=0;i<nb;i++)
 		{
-			this.values[i] = Math.random();
+			if (Math.random()>=0.5)
+				this.values[i] = 0.9;
+			else
+				this.values[i] = 0.0;
 		}
 	}
 }

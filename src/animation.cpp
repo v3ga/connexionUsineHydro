@@ -50,6 +50,7 @@ void animation::update(float dt)
 bool animation::loadScript(const char* s)
 {
 	OFAPPLOG->begin("animation::loadScript("+ofToString(s)+")");
+	m_pathAbsScript=s;
 
 	string pathAbs = s;
 	if (pathAbs != "")
@@ -125,7 +126,7 @@ void animation::callScriptUpdate(float dt)
 		ofxJSCallFunctionNameObject_IfExists(mp_obj,"update", args,1,retVal);
 
 		JSObject* array = JSVAL_TO_OBJECT(retVal);
-		if (mp_grid && ofxJSObject_IS_Array( array ))
+		if (mp_grid && array && ofxJSObject_IS_Array( array ))
 		{
 			jsuint arrayLength=0;
 			ofxJSArrayLength(array,arrayLength);

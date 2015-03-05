@@ -98,6 +98,7 @@ bool grid::setupDmx(ofxXmlSettings& settings)
 	if ( m_dmx.connect(port) )
 	{
 		OFAPPLOG->println("- OK connected to bus "+port);
+		m_isDmxSetup = true;
 	}
 	else
 	{
