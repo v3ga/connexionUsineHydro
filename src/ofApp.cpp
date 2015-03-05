@@ -24,7 +24,7 @@ void ofApp::setup()
 			string animScript = settings.getValue("animation:name","___EMPTY___");
 
 			// Grid size + DMX
-			m_grid.setRowsCols(1,4);
+			m_grid.setRowsCols(2,72);
 			m_grid.setupDmx(settings);
 
 			// Creating animation
@@ -46,6 +46,14 @@ void ofApp::setup()
 
 			// Grid view
 			m_gridView.setGrid(&m_grid);
+			m_gridView.setDrawChannels(false);
+			
+			// Messages
+			m_rqMessageManager.setURLRQInstallations("http://exhibitions.2roqs.com/");
+			m_rqMessageManager.setInstalId(50);
+			m_rqMessageManager.setLog();
+			m_rqMessageManager.setPeriod(3.0, true);
+			m_rqMessageManager.setup();
 
 
 			// Controls
@@ -66,6 +74,7 @@ void ofApp::update()
 {
 	float dt = ofGetLastFrameTime();
 
+	m_rqMessageManager.update(dt);
 	m_grid.update(dt);
 }
 

@@ -5,6 +5,7 @@
 #include "grid.h"
 #include "gridView.h"
 #include "tool.h"
+#include "rqMessageManager.h"
 
 class ofApp : public ofBaseApp{
 
@@ -32,4 +33,5 @@ class ofApp : public ofBaseApp{
 		gridView				m_gridView;
 		animation*				mp_animation;
 		toolManager				m_toolManager;
+		rqMessageManager		m_rqMessageManager;
 };

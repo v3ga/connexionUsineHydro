@@ -98,6 +98,10 @@
 		F9704E9A1AA4FE6300E2FD89 /* libJavascript.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9704E231AA4F8AE00E2FD89 /* libJavascript.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F9704E9B1AA4FE6300E2FD89 /* libnspr4.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9704E241AA4F8AE00E2FD89 /* libnspr4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F9C20834354ACC8337320B8C /* ofxUIMultiImageToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C5ED4467DFF0AC3482E9362 /* ofxUIMultiImageToggle.cpp */; };
+		F9D6C5091AA89FC70063484D /* rqMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9D6C5071AA89FC70063484D /* rqMessage.cpp */; };
+		F9D6C50C1AA8A3350063484D /* rqMessageManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9D6C50A1AA8A3350063484D /* rqMessageManager.cpp */; };
+		F9D6C50F1AA8BD000063484D /* animationScrolling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9D6C50D1AA8BD000063484D /* animationScrolling.cpp */; };
+		F9D6C5121AA8BDD00063484D /* globals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9D6C5101AA8BDD00063484D /* globals.cpp */; };
 		FB8AA9FA6535767BE31806BC /* ofxUIImageToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B848522CCA3A75ABD56752C9 /* ofxUIImageToggle.cpp */; };
 		FBD0CD0AFE3849C14E829CAF /* ofxUIImageSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B5F60B902BFFD95E99AAB34 /* ofxUIImageSampler.cpp */; };
 		FE0F1DB69ACCD163E9DA2A15 /* ofxUIRotarySlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64F3DE24F191ECED9DBE903C /* ofxUIRotarySlider.cpp */; };
@@ -365,6 +369,14 @@
 		F9704E9D1AA5047000E2FD89 /* animRandom.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = animRandom.js; sourceTree = "<group>"; };
 		F9704E9E1AA5048B00E2FD89 /* lib.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = lib.js; sourceTree = "<group>"; };
 		F9A4454B00CCFD7265D3CA85 /* ofxUILabelButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUILabelButton.cpp; path = ../../../addons/ofxUI/src/ofxUILabelButton.cpp; sourceTree = SOURCE_ROOT; };
+		F9D6C5071AA89FC70063484D /* rqMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rqMessage.cpp; sourceTree = "<group>"; };
+		F9D6C5081AA89FC70063484D /* rqMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rqMessage.h; sourceTree = "<group>"; };
+		F9D6C50A1AA8A3350063484D /* rqMessageManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rqMessageManager.cpp; sourceTree = "<group>"; };
+		F9D6C50B1AA8A3350063484D /* rqMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rqMessageManager.h; sourceTree = "<group>"; };
+		F9D6C50D1AA8BD000063484D /* animationScrolling.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = animationScrolling.cpp; sourceTree = "<group>"; };
+		F9D6C50E1AA8BD000063484D /* animationScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animationScrolling.h; sourceTree = "<group>"; };
+		F9D6C5101AA8BDD00063484D /* globals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = globals.cpp; sourceTree = "<group>"; };
+		F9D6C5111AA8BDD00063484D /* globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
 		F9DF961B5E7D4C4E1E5D029C /* ofxUITextArea.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUITextArea.h; path = ../../../addons/ofxUI/src/ofxUITextArea.h; sourceTree = SOURCE_ROOT; };
 		FBE1B379902B3C585DC8F7A2 /* ofxUILabelButton.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUILabelButton.h; path = ../../../addons/ofxUI/src/ofxUILabelButton.h; sourceTree = SOURCE_ROOT; };
 		FC5DA1C87211D4F6377DA719 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = tinyxmlparser.cpp; path = ../../../addons/ofxXmlSettings/libs/tinyxmlparser.cpp; sourceTree = SOURCE_ROOT; };
@@ -651,10 +663,18 @@
 				F9704DA11AA4B87300E2FD89 /* animation.h */,
 				F9704DA31AA4BA3300E2FD89 /* animationWave.cpp */,
 				F9704DA41AA4BA3300E2FD89 /* animationWave.h */,
+				F9D6C50D1AA8BD000063484D /* animationScrolling.cpp */,
+				F9D6C50E1AA8BD000063484D /* animationScrolling.h */,
 				F9704DA61AA4BDBE00E2FD89 /* gridView.cpp */,
 				F9704DA71AA4BDBE00E2FD89 /* gridView.h */,
 				F9704E941AA4FD3F00E2FD89 /* js.h */,
 				F9704E951AA4FD3F00E2FD89 /* js.cpp */,
+				F9D6C5071AA89FC70063484D /* rqMessage.cpp */,
+				F9D6C5081AA89FC70063484D /* rqMessage.h */,
+				F9D6C50A1AA8A3350063484D /* rqMessageManager.cpp */,
+				F9D6C50B1AA8A3350063484D /* rqMessageManager.h */,
+				F9D6C5101AA8BDD00063484D /* globals.cpp */,
+				F9D6C5111AA8BDD00063484D /* globals.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -961,6 +981,7 @@
 				F9704E8E1AA4F8AE00E2FD89 /* ofxJSVideoPlayer.cpp in Sources */,
 				F9704DA51AA4BA3300E2FD89 /* animationWave.cpp in Sources */,
 				7BE46522B64E24FAEDE1A25D /* ofxUICanvas.cpp in Sources */,
+				F9D6C5121AA8BDD00063484D /* globals.cpp in Sources */,
 				DF0C851B244C4C867CEA8806 /* ofxUICircleSlider.cpp in Sources */,
 				9BE4AE0AA2B8C436BDFE9D4D /* ofxUIDragableLabelButton.cpp in Sources */,
 				F392A99D83698FC099127880 /* ofxUIDropDownList.cpp in Sources */,
@@ -984,6 +1005,7 @@
 				F440B307990F8F5CE40B9111 /* ofxUIMovingGraph.cpp in Sources */,
 				F9704DA81AA4BDBE00E2FD89 /* gridView.cpp in Sources */,
 				222C3AB10FA3158602718602 /* ofxUIMultiImageButton.cpp in Sources */,
+				F9D6C50F1AA8BD000063484D /* animationScrolling.cpp in Sources */,
 				F9C20834354ACC8337320B8C /* ofxUIMultiImageToggle.cpp in Sources */,
 				F9704D9C1AA4AF3E00E2FD89 /* grid.cpp in Sources */,
 				F9704D961AA12DE200E2FD89 /* ofAppLog.cpp in Sources */,
@@ -1007,6 +1029,7 @@
 				5AE95ADB5549701423B6DA48 /* ofxUITabBar.cpp in Sources */,
 				C961BE22AB9A8CCF037FC18F /* ofxUITextArea.cpp in Sources */,
 				F8D05F7C7F785CE323983B47 /* ofxUITextInput.cpp in Sources */,
+				F9D6C50C1AA8A3350063484D /* rqMessageManager.cpp in Sources */,
 				F9704E851AA4F8AE00E2FD89 /* ofxJSOpenGL.cpp in Sources */,
 				04C82720B149CE576B8CBB06 /* ofxUIToggle.cpp in Sources */,
 				F9704D991AA12F2400E2FD89 /* pixelLetter.cpp in Sources */,
@@ -1016,6 +1039,7 @@
 				F9704E8B1AA4F8AE00E2FD89 /* ofxJSTrueTypeFont.cpp in Sources */,
 				AE281BEBF3A00F1FC37F3DA0 /* ofxUIWaveform.cpp in Sources */,
 				82845E1F8C90E1F5A99D9868 /* ofxUIWidget.cpp in Sources */,
+				F9D6C5091AA89FC70063484D /* rqMessage.cpp in Sources */,
 				CE5D89B9893EAA12F511DCAC /* ofxUIWidgetWithLabel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

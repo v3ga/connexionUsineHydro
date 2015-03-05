@@ -5,3 +5,6 @@
 <animation>
 	<name>animRandom.js</name>
 </animation>
+<messages>
+	<instalId>50</instalId>
+</messages>
