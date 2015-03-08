@@ -38,18 +38,28 @@ class grid
 		animation*	getAnimation			(){return mp_animation;}
 
 		void		update					(float dt);
+		void		sendPixelsDmx			();
 		void		setPixelValue			(float value, int r, int c);
 		void		setPixelValue			(float value, int index);
 		gridPixel*	getPixel				(int r, int c);
-
+ 
+		void		beginOffscreen			(){m_offscreen.begin();}
+		void		endOffscreen			(){m_offscreen.end();}
+		void		renderOffscreen			(ofFbo& other);
+		ofFbo&		getOffscreen			(){return m_offscreen;}
 
    protected:
-   		void		zeroAll					();
+   		void			zeroAll					();
  
-		int			m_rows,m_cols;
-		gridPixel*	mp_pixels;
-		animation*	mp_animation;
-		ofxDmx		m_dmx;
-		bool		m_isDmxSetup;
+		int				m_rows,m_cols;
+		gridPixel*		mp_pixels;
+
+		animation*		mp_animation;
+		ofFbo			m_offscreen;
+		ofFloatPixels	m_offscreenFloatPix;
+
+		ofxDmx			m_dmx;
+		bool			m_isDmxSetup;
+		bool			m_isDmxEnable;
 
 };

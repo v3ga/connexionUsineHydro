@@ -84,5 +84,21 @@ void gridView::draw(ofRectangle& rect)
 	}
 }
 
+//--------------------------------------------------------------
+void gridView::drawOffscreen(ofRectangle& rect)
+{
+	if (mp_grid)
+	{
+		ofPushStyle();
+		ofPushMatrix();
+		ofTranslate(rect.getX(),rect.getY());
+	
+		mp_grid->getOffscreen().draw(0,0,rect.getWidth(),rect.getHeight());
+	
+		ofPopMatrix();
+		ofPushStyle();
+	}
+
+}
 
 

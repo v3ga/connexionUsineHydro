@@ -18,6 +18,7 @@ class gridView
 		void		setGrid			(grid* pGrid);
 		void		setDrawChannels	(bool is=true){m_isDrawChannelDmx=is;}
 		void		draw			(ofRectangle& rect);
+		void		drawOffscreen	(ofRectangle& rect);
  
  
  	protected:

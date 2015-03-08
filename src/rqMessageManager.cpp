@@ -91,6 +91,16 @@ rqMessage* rqMessageManager::getMessage()
 }
 
 //--------------------------------------------------------------
+rqMessage* rqMessageManager::getMessageAt(int index)
+{
+	if (index < m_messages.size())
+	{
+		return m_messages[index];
+	}
+	return 0;
+}
+
+//--------------------------------------------------------------
 void rqMessageManager::loadNewMessages()
 {
 	m_isLoading = true;

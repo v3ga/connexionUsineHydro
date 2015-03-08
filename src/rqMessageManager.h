@@ -23,9 +23,12 @@ class rqMessageManager
  		bool					isLoading				(){return m_isLoading;}
  
 		rqMessage*				getMessage				();
+		rqMessage*				getMessageAt			(int index); // wont remove the message from list, use carefully
+ 
 
 		void					setup					();
 		void					update					(float dt);
+		void 					urlResponse		(ofHttpResponse& response);
 
  
 
@@ -34,7 +37,6 @@ class rqMessageManager
 
 		void					updateURL		();
 
-		void 					urlResponse		(ofHttpResponse& response);
 		void					deleteMessages	();
 		void					loadNewMessages	();
 

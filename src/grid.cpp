@@ -37,7 +37,8 @@ void grid::zeroAll()
 	m_cols 			= 0;
 	mp_pixels 		= 0;
 	mp_animation	= 0;
-	m_isDmxSetup	= true;
+	m_isDmxSetup	= false;
+	m_isDmxEnable	= false;
 }
 
 
@@ -74,9 +75,11 @@ void grid::createPixels()
 		{
 			for (int c=0;c<m_cols;c++)
 			{
-				mp_pixels[c+r*m_rows].setRowCol(r,c);
+				mp_pixels[c+r*m_cols].setRowCol(r,c);
 			}
 		}
+
+		m_offscreen.allocate(m_cols, m_rows, GL_RGBA32F);
 	}
 	else
 	{
@@ -92,21 +95,28 @@ bool grid::setupDmx(ofxXmlSettings& settings)
 {
 	OFAPPLOG->begin("grid::setupDmx()");
 	
-	string port = settings.getValue("dmx:port", "???");
+	m_isDmxEnable = settings.getAttribute("dmx", "enable", 0) > 0;
 
-	m_isDmxSetup	= false;
-	if ( m_dmx.connect(port) )
+	if (m_isDmxEnable)
 	{
-		OFAPPLOG->println("- OK connected to bus "+port);
-		m_isDmxSetup = true;
+		string port = settings.getValue("dmx:port", "???");
+		m_isDmxSetup	= false;
+		if ( m_dmx.connect(port) )
+		{
+			OFAPPLOG->println("- OK connected to bus "+port);
+			m_isDmxSetup = true;
+		}
+		else
+		{
+			OFAPPLOG->println("- ERROR connecting to bus "+port);
+		}
+
+		setChannelsDmx();
 	}
 	else
 	{
-		OFAPPLOG->println("- ERROR connecting to bus "+port);
+		OFAPPLOG->println("- Dmx not enabled. ");
 	}
-
-	setChannelsDmx();
-	
 
 	OFAPPLOG->end();
 }
@@ -124,7 +134,7 @@ void grid::setChannelsDmx(int channelStart)
 		{
 			for (int c=0;c<m_cols;c++)
 			{
-				mp_pixels[c+r*m_rows].setChannelDmx(channel++);
+				mp_pixels[c+r*m_cols].setChannelDmx(channel++);
 			}
 		}
 	}
@@ -152,11 +162,32 @@ void grid::setAnimation(animation* pAnimation)
 void grid::update(float dt)
 {
 	// Animation
-	if (mp_animation)
-		mp_animation->update(dt);
+	//if (mp_animation)
+	//	mp_animation->update(dt);
 
+	// Offscreen > pixels
+	m_offscreen.readToPixels(m_offscreenFloatPix);
+
+//	for (int i=0;i<getPixelsNb();i++)
+	ofFloatColor color;
+	for (int r=0;r<m_rows;r++)
+	{
+		for (int c=0;c<m_cols;c++)
+		{
+//			ofLog()  << m_offscreenFloatPix.getColor(c,r);
+//			mp_pixels[i].setValue( m_offscreenFloatPix[i] );
+			color = m_offscreenFloatPix.getColor(c,r);
+			mp_pixels[ c+r*m_cols ].setValue( color[0] );
+		}
+	}
+
+}
+
+//--------------------------------------------------------------
+void grid::sendPixelsDmx()
+{
 	// Send to dmx
-	if (m_isDmxSetup && mp_pixels)
+	if (m_isDmxEnable && m_isDmxSetup && mp_pixels)
 	{
 		int nb = m_rows*m_cols;
 		gridPixel* pGridPixel=0;
@@ -169,12 +200,13 @@ void grid::update(float dt)
 	}
 }
 
+
 //--------------------------------------------------------------
 void grid::setPixelValue(float value, int r, int c)
 {
 	if (mp_pixels && (r<m_rows && c<m_cols))
 	{
-		mp_pixels[c+r*m_rows].setValue(value);
+		mp_pixels[c+r*m_cols].setValue(value);
 	}
 }
 
@@ -192,10 +224,39 @@ gridPixel* grid::getPixel(int r, int c)
 {
 	if (mp_pixels && (r<m_rows && c<m_cols))
 	{
-		return mp_pixels+(c+r*m_rows);
+		return mp_pixels+(c+r*m_cols);
 	}
 	return 0;
 }
+
+//--------------------------------------------------------------
+void grid::renderOffscreen(ofFbo& other)
+{
+	beginOffscreen();
+	ofBackground(0,0,200);
+	//ofRect(0,0,m_offscreen.getWidth(),m_offscreen.getHeight());
+	ofSetColor(255);
+	
+	other.getTextureReference().bind();
+	glBegin(GL_QUADS);
+		glTexCoord2f(0, 0);
+		glVertex2f(0, 0);
+
+		glTexCoord2f(other.getWidth(), 0);
+		glVertex2f(m_offscreen.getWidth(), 0);
+
+		glTexCoord2f(other.getWidth(), other.getHeight());
+		glVertex2f(m_offscreen.getWidth(), m_offscreen.getHeight());
+
+		glTexCoord2f(0, other.getHeight());
+		glVertex2f(0,m_offscreen.getHeight());
+	glEnd();
+	other.getTextureReference().unbind();
+
+	endOffscreen();
+}
+
+
 
 
 

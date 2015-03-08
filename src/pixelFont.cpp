@@ -10,6 +10,7 @@
 #include "pixelLetter.h"
 #include "ofxXmlSettings.h"
 #include "ofAppLog.h"
+#include "utils.h"
 
 //--------------------------------------------------------------
 pixelFont::pixelFont()
@@ -38,7 +39,8 @@ void pixelFont::zeroAll()
 bool pixelFont::load(string filename)
 {
 	OFAPPLOG->begin("pixelFont::load("+filename+")");
-
+	setFilename(filename);
+	
 	ofxXmlSettings data;
 	bool ok = false;
 	if ( data.load(ofToDataPath(filename)) )
@@ -78,9 +80,6 @@ bool pixelFont::load(string filename)
 				ok = true;
 			}
 		}
-
-	
-	
 	}
 
 	OFAPPLOG->end();
@@ -92,7 +91,7 @@ pixelLetter* pixelFont::getLetter(int codePoint)
 {
 	for (int i=0;i<m_letters.size();i++)
 	{
-		if (m_letters[i]->m_i == codePoint)
+		if (m_letters[i]->m_codePoint == codePoint)
 			return m_letters[i];
 	}
 	return 0;
@@ -108,6 +107,42 @@ pixelLetter* pixelFont::getLetter(string value)
 	}
 	return 0;
 }
+
+//--------------------------------------------------------------
+string pixelFont::encodeString(string text)
+{
+	string s;
+
+	string::iterator it = text.begin();
+	while (it != text.end())
+	{
+		int codePoint = (int) utf8::next(it, text.end());
+		pixelLetter* pLetter = getLetter( codePoint );
+		if (pLetter){
+			s = s + pLetter->m_c;
+		}
+	}
+	
+	return s;
+}
+
+//--------------------------------------------------------------
+int pixelFont::getWidth(string text)
+{
+	int w = 0;
+
+	string::iterator it = text.begin();
+	while (it != text.end())
+	{
+		int codePoint = (int) utf8::next(it, text.end());
+		pixelLetter* pLetter = getLetter( codePoint );
+		if (pLetter)
+			w+=pLetter->m_cols;
+	}
+
+	return w;
+}
+
 
 
 

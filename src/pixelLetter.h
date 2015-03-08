@@ -20,7 +20,7 @@ class pixelLetter
 
 		int					m_rows;
 		int					m_cols;
-		int					m_i;
+		int					m_codePoint;	// utf8
 		string				m_c;
 		unsigned char*		mp_data;
 };

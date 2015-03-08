@@ -27,9 +27,10 @@ animation::~animation()
 }
 
 //--------------------------------------------------------------
-void animation::setGrid(grid* pGrid)
+void animation::setGrid(grid* pGrid, float scaleForOffscreen)
 {
 	mp_grid = pGrid;
+	m_offscreen.allocate(scaleForOffscreen*mp_grid->getCols(),scaleForOffscreen*mp_grid->getRows(),GL_RGBA32F);
 	callScriptSetGrid();
 }
 
@@ -43,6 +44,48 @@ void animation::setup()
 void animation::update(float dt)
 {
 	callScriptUpdate(dt);
+}
+
+//--------------------------------------------------------------
+void animation::render()
+{
+	if (isRenderOffscreen())
+	{
+		m_offscreen.begin();
+		renderOffscreen();
+		m_offscreen.end();
+
+		if (mp_grid)
+		{
+			mp_grid->renderOffscreen( m_offscreen );
+		}
+	}
+}
+
+//--------------------------------------------------------------
+void animation::renderOffscreen()
+{
+	callScriptRenderOffscreen();
+}
+
+//--------------------------------------------------------------
+void animation::beginShader()
+{
+	m_shader.begin();
+}
+
+//--------------------------------------------------------------
+void animation::endShader()
+{
+	m_shader.end();
+}
+
+//--------------------------------------------------------------
+void animation::loadShader(string name)
+{
+	string v = "shaders/"+name+".vert";
+	string f = "shaders/"+name+".frag";
+	m_shader.load(v,f);
 }
 
 
@@ -140,6 +183,21 @@ void animation::callScriptUpdate(float dt)
 				}
 			}
 		}
+	}
+}
+
+
+//--------------------------------------------------------------
+void animation::callScriptRenderOffscreen()
+{
+	if (isScript() && mp_obj )
+	{
+		ofxJSValue retVal;
+		ofxJSValue args[2];
+		args[0] = float_TO_ofxJSValue( m_offscreen.getWidth() );
+		args[1] = float_TO_ofxJSValue( m_offscreen.getHeight() );
+
+		ofxJSCallFunctionNameObject_IfExists(mp_obj,"renderOffscreen", args,2,retVal);
 	}
 }
 

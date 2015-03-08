@@ -16,6 +16,12 @@ static char s_jsStringBuffer[2048];
 static string s_jsTemp;
 
 
+ofxJSDeclareFunctionCpp(loadShader);
+ofxJSDeclareFunctionCpp(beginShader);
+ofxJSDeclareFunctionCpp(endShader);
+ofxJSDeclareFunctionCpp(setUniform1fShader);
+ofxJSDeclareFunctionCpp(setUniform2fShader);
+
 
 
 

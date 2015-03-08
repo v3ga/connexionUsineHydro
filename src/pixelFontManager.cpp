@@ -33,13 +33,14 @@ bool pixelFontManager::add(string filename)
 
 	if (pFont->load(filename))
 	{
-		if ( get(pFont->getName()) == 0)
+		if ( getByFilename(pFont->getFilename()) == 0)
 		{
 			m_fonts.push_back( pFont );
 			ok = true;
+			OFAPPLOG->println("- ADDING font '"+pFont->getName()+"' to the list.");
 		}
 		else{
-			OFAPPLOG->println("- ALREADY EXISTS, not adding it to the fonts list.");
+			OFAPPLOG->println("- font '"+pFont->getName()+"' ALREADY EXISTS, not adding it to the fonts list.");
 		}
 	}
 	else
@@ -59,7 +60,24 @@ bool pixelFontManager::add(string filename)
 pixelFont* pixelFontManager::get(string name)
 {
 	for (int i=0;i<m_fonts.size();i++)
-		if (m_fonts[i]->getName() == name)
+	{
+		if (m_fonts[i]->getName() == name){
 			return m_fonts[i];
+		}
+	}
 	return 0;
 }
+
+//--------------------------------------------------------------
+pixelFont* pixelFontManager::getByFilename(string filename)
+{
+	for (int i=0;i<m_fonts.size();i++)
+	{
+		if (m_fonts[i]->getFilename() == filename){
+			return m_fonts[i];
+		}
+	}
+	return 0;
+}
+
+

@@ -9,6 +9,8 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
+#include "Poco/UTF8String.h"
+
 
 class rqMessage
 {
@@ -19,9 +21,8 @@ class rqMessage
 	
  
 		int					m_timestamp;
-		string				m_text;
+		string				m_text;			// stored as utf8 sequence of caracters (see http://pocoproject.org/slides/040-StringsAndFormatting.pdf)
 		vector<string>		m_words;
-
 
 	private:
 		void				zeroAll	();

@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
-<dmx>
+<dmx enable="0">
     <port>tty.usbserial-EN160423</port>
 </dmx>
 <animation>
-	<name>animRandom.js</name>
+	<name>animWaveRadial.js</name>
 </animation>
 <messages>
 	<instalId>50</instalId>

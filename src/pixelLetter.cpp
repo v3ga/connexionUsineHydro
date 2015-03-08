@@ -11,7 +11,7 @@
 //--------------------------------------------------------------
 pixelLetter::pixelLetter(int codePoint, int rows, int cols, string value, string strData)
 {
-	m_i = codePoint;
+	m_codePoint = codePoint;
 	m_c =  value;
 	m_rows = rows;
 	m_cols = cols;

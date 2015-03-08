@@ -16,8 +16,10 @@ class pixelFontManager
 		~pixelFontManager	();
 
 	
-		bool		add		(string filename);
- 		pixelFont*	get		(string name);
+		bool		add				(string filename);
+ 		pixelFont*	get				(string name);
+ 		pixelFont*	getByFilename	(string filename);
+ 
 	
 
 	protected:

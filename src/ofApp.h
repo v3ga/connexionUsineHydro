@@ -34,4 +34,5 @@ class ofApp : public ofBaseApp{
 		animation*				mp_animation;
 		toolManager				m_toolManager;
 		rqMessageManager		m_rqMessageManager;
+ 
 };

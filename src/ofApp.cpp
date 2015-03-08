@@ -1,9 +1,11 @@
 #include "ofApp.h"
 #include "ofAppLog.h"
 #include "ofxXmlSettings.h"
+#include "globals.h"
 #include "js.h"
 
 #include "animationWave.h"
+#include "animationScrolling.h"
 
 
 //--------------------------------------------------------------
@@ -18,6 +20,8 @@ void ofApp::setup()
 
 			// Test : loading a pixel font
 			m_pixelFontManager.add("fonts/150228_pixelfont.xml");
+			m_pixelFontManager.add("fonts/150306_pixelfont.xml");
+			GLOBALS->setPixelFontManager(&m_pixelFontManager);
 
 			// JS
 			setupJS();
@@ -36,8 +40,9 @@ void ofApp::setup()
 			}
 			else
 			{
-				mp_animation = new animationWave();
+				mp_animation = new animationScrolling();
 			}
+			GLOBALS->mp_animation = mp_animation;
 
 			mp_animation->setup();
 			mp_animation->setGrid(&m_grid);
@@ -55,6 +60,7 @@ void ofApp::setup()
 			m_rqMessageManager.setPeriod(3.0, true);
 			m_rqMessageManager.setup();
 
+			GLOBALS->setRQMessageManager(&m_rqMessageManager);
 
 			// Controls
 			m_toolManager.createControls(ofVec2f(ofGetWidth(),ofGetHeight()),ofVec2f(ofGetWidth(),ofGetHeight()));
@@ -75,7 +81,12 @@ void ofApp::update()
 	float dt = ofGetLastFrameTime();
 
 	m_rqMessageManager.update(dt);
+	if (mp_animation){
+		mp_animation->render();
+		mp_animation->update(dt);
+	}
 	m_grid.update(dt);
+	m_grid.sendPixelsDmx();
 }
 
 //--------------------------------------------------------------
@@ -92,6 +103,19 @@ void ofApp::draw()
 		gridRect.setY( 0.5f*(ofGetHeight()-gridRect.getHeight()) );
 
 		m_gridView.draw(gridRect);
+
+
+		if (mp_animation)
+		{
+			ofRectangle gridAnimOffscreen(0,gridRect.getY()+gridRect.getHeight()+10,ofGetWidth(),hRect);
+			mp_animation->getOffscreen().draw(gridAnimOffscreen);
+
+			ofRectangle gridOffscreen(0,gridAnimOffscreen.getY()+gridAnimOffscreen.getHeight()+10,ofGetWidth(),hRect);
+		     m_gridView.drawOffscreen(gridOffscreen);
+		}
+
+
+
 
 		m_toolManager.drawUI();
 	}
