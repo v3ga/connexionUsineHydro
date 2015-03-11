@@ -16,16 +16,19 @@
 //--------------------------------------------------------------
 messageScrolling::messageScrolling(animationScrolling* pAnimation, rqMessage* pMessage)
 {
-	mp_animParent 	= pAnimation;
-	mp_message		= pMessage;
+	mp_animParent 		= pAnimation;
+	mp_message			= pMessage;
+	m_hasScrolled		= false;
+	m_isInside			= false;
+	m_isInsideLastTime	= false;
 	
 	if (pAnimation->getPixelFont())
 	{
 		m_textEncoded	= pAnimation->getPixelFont()->encodeString(pMessage->m_text);
 		m_width			= pAnimation->getPixelFont()->getWidth(m_textEncoded);
 	}
-}
 
+}
 
 //--------------------------------------------------------------
 void messageScrolling::setPosition(float x, float y)
@@ -34,20 +37,32 @@ void messageScrolling::setPosition(float x, float y)
 }
 
 //--------------------------------------------------------------
-void messageScrolling::setSpeed	(float speed)
-{
-}
-
-//--------------------------------------------------------------
 void messageScrolling::update(float dt)
 {
-	m_position.x -= 2.0*dt;
-
-	// Out of screen
-	if (m_position.x + m_width<=0)
+	grid* pGrid = mp_animParent->getGrid();
+	if (pGrid)
 	{
-		// Infor animation
+		m_position.x -= mp_animParent->getSpeed()*dt;
+		
+		// Inside ?
+		m_isInsideLastTime = m_isInside;
+		m_isInside = getPositionEnd()<=pGrid->getCols()-2;
+		
+		// Out of screen ?
+		// ofLog() << "x=" << m_position.x << ",w="<<m_width<<";end="<<getPositionEnd();
+		if (getPositionEnd()<=-1)
+		{
+			m_hasScrolled = true; // will be removed by parent
+		}
 	}
+}
+
+
+//--------------------------------------------------------------
+bool messageScrolling::hasPositionEndGotInside()
+{
+	if (m_isInside && !m_isInsideLastTime) return true;
+	return false;
 }
 
 //--------------------------------------------------------------
@@ -64,9 +79,6 @@ void messageScrolling::drawOffscreen()
 	float y = 0;
 
 
-
-	ofBackground(0);
-
 	ofPushStyle();
 	ofSetColor(255);
 
@@ -76,11 +88,12 @@ void messageScrolling::drawOffscreen()
 
 	ofPushMatrix();
 	string::iterator it = m_textEncoded.begin();
-	while (it != m_textEncoded.end() && x<pGrid->getCols())
+	while (it != m_textEncoded.end())
 	{
 		int codePoint = (int) utf8::next(it, m_textEncoded.end());
 		pixelLetter* pLetter = pPixelFont->getLetter( codePoint );
-		if (pLetter){
+		if (pLetter)
+		{
 			for (int r=0; r<pLetter->m_rows; r++)
 			{
 				for (int c=0; c<pLetter->m_cols; c++)
@@ -97,8 +110,6 @@ void messageScrolling::drawOffscreen()
 		x = x+3; // next char position
 	}
 	ofPopMatrix();
-
-	
 
  
 	ofPopMatrix();

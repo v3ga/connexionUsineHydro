@@ -24,6 +24,7 @@ class animationScrolling : public animation
 		void						update			(float dt);
 		void						renderOffscreen	();
 		pixelFont*					getPixelFont	(){return mp_pixelFont;}
+		float						getSpeed		(){return m_speed;}
 
  	protected:
 		pixelFont*					mp_pixelFont;
@@ -33,4 +34,5 @@ class animationScrolling : public animation
 
 		void						createMessageScrolling	(rqMessage* pMessage);
 		void						deleteMessages			();
+		void						checkNewMessage			();
 };

@@ -20,6 +20,7 @@ animationScrolling::animationScrolling() : animation("scrolling")
 {
 	mp_pixelFont 	= 0;
 	mp_message		= 0;
+	m_speed			= 2.5f;
 }
 
 //--------------------------------------------------------------
@@ -37,27 +38,57 @@ void animationScrolling::setup()
 //--------------------------------------------------------------
 void animationScrolling::update(float dt)
 {
+	// Update all messages
 	int nbMessagesScrolling = m_messagesScrolling.size();
 	for (int i=0;i<nbMessagesScrolling;i++)
 	{
 		m_messagesScrolling[i]->update(dt);
 	}
 
-
-	if (m_messagesScrolling.size()==0)
+	// Check for «outside» messages and remove them
+	vector<messageScrolling*>::iterator it = m_messagesScrolling.begin();
+	for (; it != m_messagesScrolling.end(); )
 	{
-		rqMessage* pMessage = RQMESSAGES->getMessage();
-		if (pMessage)
-		{
-			createMessageScrolling(pMessage);
+		if ((*it)->m_hasScrolled){
+			delete *it;
+			it = m_messagesScrolling.erase( it );
+		}else{
+			++it;
 		}
+	
 	}
 
+	// Check the end position of the last inserted message
+	nbMessagesScrolling = m_messagesScrolling.size();
+	if (nbMessagesScrolling>0)
+	{
+		messageScrolling* pLastMessage = m_messagesScrolling[nbMessagesScrolling-1];
+		if (pLastMessage->hasPositionEndGotInside()){
+			checkNewMessage();
+		}
+	 
+	}
+	// No message scrolling yet ? Try to get one
+	else
+	{
+		checkNewMessage();
+	}
+}
+
+
+
+//--------------------------------------------------------------
+void animationScrolling::checkNewMessage()
+{
+  rqMessage* pMessage = RQMESSAGES->getMessage();
+  if (pMessage)
+	  createMessageScrolling(pMessage);
 }
 
 //--------------------------------------------------------------
 void animationScrolling::renderOffscreen()
 {
+	ofBackground(0);
 	int nbMessagesScrolling = m_messagesScrolling.size();
 	for (int i=0;i<nbMessagesScrolling;i++)
 	{
@@ -72,7 +103,8 @@ void animationScrolling::createMessageScrolling(rqMessage* pMessage)
 	OFAPPLOG->begin("animationScrolling::createMessageScrolling()");
 	
 	messageScrolling* pMessageScrolling = new messageScrolling(this, pMessage);
-	pMessageScrolling->setPosition(0,0);
+	pMessageScrolling->setPosition(mp_grid->getCols(),0);
+
 	if (pMessageScrolling->m_textEncoded != "")
 	{
 		OFAPPLOG->println("- encoded text="+pMessageScrolling->m_textEncoded);

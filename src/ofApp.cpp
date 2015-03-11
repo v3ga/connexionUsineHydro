@@ -57,7 +57,7 @@ void ofApp::setup()
 			// Messages
 			m_rqMessageManager.setURLRQInstallations("http://exhibitions.2roqs.com/");
 			m_rqMessageManager.setInstalId(50);
-			m_rqMessageManager.setLog();
+			m_rqMessageManager.setLog(false);
 			m_rqMessageManager.setPeriod(3.0, true);
 			m_rqMessageManager.setup();
 

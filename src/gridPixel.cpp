@@ -27,7 +27,7 @@ void gridPixel::zeroAll()
 //--------------------------------------------------------------
 void gridPixel::setValue(float value)
 {
-	m_value = value;
+	m_valueTarget = value;
 	if (m_isHistory)
 	{
 		m_valueHistory.push_back(m_value);
@@ -35,6 +35,13 @@ void gridPixel::setValue(float value)
 			m_valueHistory.erase( m_valueHistory.begin() );
 		}
 	}
+}
+
+//--------------------------------------------------------------
+void gridPixel::update(float dt)
+{
+//	m_value += (m_valueTarget-m_value)*0.1;
+	m_value = m_valueTarget;
 }
 
 

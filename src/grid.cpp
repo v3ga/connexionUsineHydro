@@ -161,23 +161,20 @@ void grid::setAnimation(animation* pAnimation)
 //--------------------------------------------------------------
 void grid::update(float dt)
 {
-	// Animation
-	//if (mp_animation)
-	//	mp_animation->update(dt);
-
 	// Offscreen > pixels
 	m_offscreen.readToPixels(m_offscreenFloatPix);
 
-//	for (int i=0;i<getPixelsNb();i++)
 	ofFloatColor color;
+	gridPixel* pGridPixel = 0;
 	for (int r=0;r<m_rows;r++)
 	{
 		for (int c=0;c<m_cols;c++)
 		{
-//			ofLog()  << m_offscreenFloatPix.getColor(c,r);
-//			mp_pixels[i].setValue( m_offscreenFloatPix[i] );
 			color = m_offscreenFloatPix.getColor(c,r);
-			mp_pixels[ c+r*m_cols ].setValue( color[0] );
+
+			pGridPixel = mp_pixels+(c+r*m_cols);
+			pGridPixel->setValue( color[0] );
+			pGridPixel->update(dt);
 		}
 	}
 

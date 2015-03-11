@@ -20,9 +20,11 @@ class gridPixel
 		int				getValueDmx		(){return (int) ofMap(m_value,0.0f,1.0f,0,255);}
 		vector<float>&	getHistory		(){return m_valueHistory;}
 
+		void			update			(float dt);
+
 		int				m_row, m_col;
 		int				m_channelDmx;
-		float			m_value;
+		float			m_value,m_valueTarget;
 
 
 
