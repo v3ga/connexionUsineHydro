@@ -17,7 +17,7 @@ animation::animation(string name)
 	mp_grid 	= 0;
 	mp_script 	= 0;
 	mp_obj		= 0;
-
+	m_scaleGridOffscreen = 1;
 }
 
 //--------------------------------------------------------------
@@ -30,6 +30,7 @@ animation::~animation()
 void animation::setGrid(grid* pGrid, float scaleForOffscreen)
 {
 	mp_grid = pGrid;
+	m_scaleGridOffscreen = scaleForOffscreen;
 	m_offscreen.allocate(scaleForOffscreen*mp_grid->getCols(),scaleForOffscreen*mp_grid->getRows(),GL_RGBA32F);
 	callScriptSetGrid();
 }

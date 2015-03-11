@@ -21,6 +21,7 @@ void ofApp::setup()
 			// Test : loading a pixel font
 			m_pixelFontManager.add("fonts/150228_pixelfont.xml");
 			m_pixelFontManager.add("fonts/150306_pixelfont.xml");
+			m_pixelFontManager.add("fonts/150311_pixelfont.xml");
 			GLOBALS->setPixelFontManager(&m_pixelFontManager);
 
 			// JS
@@ -28,11 +29,11 @@ void ofApp::setup()
 			string animScript = settings.getValue("animation:name","___EMPTY___");
 
 			// Grid size + DMX
-			m_grid.setRowsCols(2,72);
+			m_grid.setRowsCols(2,36);
 			m_grid.setupDmx(settings);
 
 			// Creating animation
-			if (animScript != "___EMPTY___")
+			if (false && animScript != "___EMPTY___")
 			{
 				mp_animation = new animation(animScript);
 				string pathScript = ofFilePath::getAbsolutePath("js/"+animScript, true);
@@ -97,7 +98,7 @@ void ofApp::draw()
 	if (m_grid.getCols()>0)
 	{
 		float wRect = ofGetWidth() / (float)m_grid.getCols();
-		float hRect = wRect;
+		float hRect = m_grid.getRows()*wRect;
 
 		ofRectangle gridRect(0,0,ofGetWidth(),hRect);
 		gridRect.setY( 0.5f*(ofGetHeight()-gridRect.getHeight()) );

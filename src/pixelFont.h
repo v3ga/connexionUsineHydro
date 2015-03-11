@@ -26,7 +26,8 @@ class pixelFont
  
  		string					encodeString	(string text); // removes unknown chars
 		int						getWidth		(string text);
-
+ 
+ 
 	protected:
 		string					m_name;
 		string					m_filename;

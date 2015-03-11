@@ -10,7 +10,10 @@
 #include "pixelFontManager.h"
 #include "rqMessageManager.h"
 #include "rqMessage.h"
+#include "messageScrolling.h"
+#include "ofAppLog.h"
 #include "globals.h"
+
 
 //--------------------------------------------------------------
 animationScrolling::animationScrolling() : animation("scrolling")
@@ -20,24 +23,78 @@ animationScrolling::animationScrolling() : animation("scrolling")
 }
 
 //--------------------------------------------------------------
+animationScrolling::~animationScrolling()
+{
+	deleteMessages();
+}
+
+//--------------------------------------------------------------
 void animationScrolling::setup()
 {
-	mp_pixelFont = PIXELFONTS->getByFilename("fonts/150306_pixelfont.xml");
+	mp_pixelFont = PIXELFONTS->getByFilename("fonts/150311_pixelfont.xml");
 }
 
 //--------------------------------------------------------------
 void animationScrolling::update(float dt)
 {
-	if (mp_message==0)
+	int nbMessagesScrolling = m_messagesScrolling.size();
+	for (int i=0;i<nbMessagesScrolling;i++)
 	{
-		mp_message = RQMESSAGES->getMessageAt(13);
+		m_messagesScrolling[i]->update(dt);
 	}
-	if (mp_message)
+
+
+	if (m_messagesScrolling.size()==0)
 	{
-		if (mp_pixelFont)
+		rqMessage* pMessage = RQMESSAGES->getMessage();
+		if (pMessage)
 		{
-			string encoded = mp_pixelFont->encodeString( mp_message->m_text );
-			ofLog() << encoded;
+			createMessageScrolling(pMessage);
 		}
 	}
+
 }
+
+//--------------------------------------------------------------
+void animationScrolling::renderOffscreen()
+{
+	int nbMessagesScrolling = m_messagesScrolling.size();
+	for (int i=0;i<nbMessagesScrolling;i++)
+	{
+		m_messagesScrolling[i]->drawOffscreen();
+	}
+}
+
+
+//--------------------------------------------------------------
+void animationScrolling::createMessageScrolling(rqMessage* pMessage)
+{
+	OFAPPLOG->begin("animationScrolling::createMessageScrolling()");
+	
+	messageScrolling* pMessageScrolling = new messageScrolling(this, pMessage);
+	pMessageScrolling->setPosition(0,0);
+	if (pMessageScrolling->m_textEncoded != "")
+	{
+		OFAPPLOG->println("- encoded text="+pMessageScrolling->m_textEncoded);
+	
+		m_messagesScrolling.push_back(pMessageScrolling);
+	}
+	else
+	{
+		delete pMessageScrolling;
+		OFAPPLOG->println("- encoded text is empty...");
+	}
+
+	OFAPPLOG->end();
+}
+
+//--------------------------------------------------------------
+void animationScrolling::deleteMessages()
+{
+	for (int i=0;i<m_messagesScrolling.size();i++){
+		delete m_messagesScrolling[i];
+	}
+	m_messagesScrolling.clear();
+}
+
+

@@ -3,7 +3,7 @@
     <port>tty.usbserial-EN160423</port>
 </dmx>
 <animation>
-	<name>animWaveRadial.js</name>
+	<name>animPlasma.js</name>
 </animation>
 <messages>
 	<instalId>50</instalId>

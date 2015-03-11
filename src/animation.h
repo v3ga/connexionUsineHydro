@@ -34,6 +34,7 @@ class animation
 		   virtual	void	renderOffscreen		();
 		   virtual	bool	isRenderOffscreen	(){return true;}
 		   			ofFbo&	getOffscreen		(){return m_offscreen;}
+			float			m_scaleGridOffscreen;
  
 		   // Utility
 		   //virtual void 	drawTextGrid		(string s, pixelFont*, int x=0, int y=0);
@@ -57,7 +58,6 @@ class animation
 			string			m_name;
  
 			ofFbo			m_offscreen;
-
 
 			string			m_pathAbsScript;
 			ofxJSScript*	mp_script;

@@ -12,17 +12,25 @@
 #include "pixelFont.h"
 
 class rqMessage;
+class messageScrolling;
 class animationScrolling : public animation
 {
 	public:
 		animationScrolling			();
+		~animationScrolling			();
 	
 
-		void			setup		();
-		void			update		(float dt);
- 
+		void						setup			();
+		void						update			(float dt);
+		void						renderOffscreen	();
+		pixelFont*					getPixelFont	(){return mp_pixelFont;}
+
  	protected:
-		pixelFont*		mp_pixelFont;
-		rqMessage*		mp_message;
- 
+		pixelFont*					mp_pixelFont;
+		rqMessage*					mp_message;
+		float						m_speed;		// pixels per second
+ 		vector<messageScrolling*>	m_messagesScrolling;
+
+		void						createMessageScrolling	(rqMessage* pMessage);
+		void						deleteMessages			();
 };

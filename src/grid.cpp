@@ -238,6 +238,7 @@ void grid::renderOffscreen(ofFbo& other)
 	ofSetColor(255);
 	
 	other.getTextureReference().bind();
+//	other.getTextureReference().setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
 	glBegin(GL_QUADS);
 		glTexCoord2f(0, 0);
 		glVertex2f(0, 0);

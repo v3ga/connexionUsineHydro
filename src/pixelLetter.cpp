@@ -31,14 +31,18 @@ pixelLetter::~pixelLetter()
 void pixelLetter::decode(string strData)
 {
 	int strPos=0;
-	for (int r=0;r<m_rows;r++)
+	string c = "";
+	int nb = m_rows*m_cols;
+	for (int i=0;i<nb;i++)
 	{
-		for (int c=0;c<m_cols;c++)
-		{
-			
-		
-			strPos+=2;
-		}
+	   c = strData.at(strPos);
+	   c += strData.at(strPos+1);
+
+	   if (c == "00")	mp_data[i] = 0;
+	   else
+	   if (c == "FF")	mp_data[i] = 255;
+   
+	   strPos+=2;
 	}
 }
 

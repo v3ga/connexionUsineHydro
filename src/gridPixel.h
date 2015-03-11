@@ -12,18 +12,25 @@
 class gridPixel
 {
 	public:
-		gridPixel	();
+		gridPixel		();
 
-		void		setRowCol		(int row, int col){m_row = row; m_col = col;}
-		void		setValue		(float value){m_value = value;}
-		void		setChannelDmx	(int channelDmx){m_channelDmx = channelDmx;}
-		int			getValueDmx		(){return (int) ofMap(m_value,0.0f,1.0f,0,255);}
+		void			setRowCol		(int row, int col){m_row = row; m_col = col;}
+		void			setValue		(float value);
+		void			setChannelDmx	(int channelDmx){m_channelDmx = channelDmx;}
+		int				getValueDmx		(){return (int) ofMap(m_value,0.0f,1.0f,0,255);}
+		vector<float>&	getHistory		(){return m_valueHistory;}
 
-		int			m_row, m_col;
-		int			m_channelDmx;
-		float		m_value;
+		int				m_row, m_col;
+		int				m_channelDmx;
+		float			m_value;
+
 
 
 	protected:
-		void		zeroAll			();
+		void			zeroAll			();
+
+		bool			m_isHistory;
+		int				m_historySize;
+		vector<float>	m_valueHistory;
+
 };
