@@ -26,10 +26,11 @@ class animationScrolling : public animation
 		pixelFont*					getPixelFont	(){return mp_pixelFont;}
 		float						getSpeed		(){return m_speed;}
 
+		float						m_speed;		// pixels per second
+
  	protected:
 		pixelFont*					mp_pixelFont;
 		rqMessage*					mp_message;
-		float						m_speed;		// pixels per second
  		vector<messageScrolling*>	m_messagesScrolling;
 
 		void						createMessageScrolling	(rqMessage* pMessage);

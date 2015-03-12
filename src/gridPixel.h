@@ -25,7 +25,9 @@ class gridPixel
 		int				m_row, m_col;
 		int				m_channelDmx;
 		float			m_value,m_valueTarget;
-
+ 
+		float			m_powerMax;		// in watts
+		float			m_power;	// in watts
 
 
 	protected:
@@ -35,4 +37,5 @@ class gridPixel
 		int				m_historySize;
 		vector<float>	m_valueHistory;
 
+		float			m_attenuation;		// attenuation per pixel
 };

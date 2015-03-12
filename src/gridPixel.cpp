@@ -22,12 +22,16 @@ void gridPixel::zeroAll()
 	m_channelDmx = 0;
 	m_isHistory = true;
 	m_historySize = 100;
+	m_attenuation = 1.0f;
+	m_powerMax = 300.0;
+	m_power = 0.0;
 }
 
 //--------------------------------------------------------------
 void gridPixel::setValue(float value)
 {
-	m_valueTarget = value;
+	m_valueTarget = m_attenuation*value;
+
 	if (m_isHistory)
 	{
 		m_valueHistory.push_back(m_value);
@@ -42,6 +46,7 @@ void gridPixel::update(float dt)
 {
 //	m_value += (m_valueTarget-m_value)*0.1;
 	m_value = m_valueTarget;
+	m_power = ofMap(m_value,0.0,1.0f, 0.0f,m_powerMax);
 }
 
 

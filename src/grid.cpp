@@ -39,8 +39,10 @@ void grid::zeroAll()
 	mp_animation	= 0;
 	m_isDmxSetup	= false;
 	m_isDmxEnable	= false;
+	m_attenuation	= 1.0f;
+	m_power			= 0.0f;
+	m_powerNorm		= 0.0f;
 }
-
 
 //--------------------------------------------------------------
 void grid::setRowsCols(int rows, int cols)
@@ -173,11 +175,28 @@ void grid::update(float dt)
 			color = m_offscreenFloatPix.getColor(c,r);
 
 			pGridPixel = mp_pixels+(c+r*m_cols);
-			pGridPixel->setValue( color[0] );
+			pGridPixel->setValue( m_attenuation*color[0] );
 			pGridPixel->update(dt);
 		}
 	}
+	
+	computePower();
+}
 
+//--------------------------------------------------------------
+void grid::computePower()
+{
+	int nb = getPixelsNb();
+	float powerMax = nb * mp_pixels[0].m_powerMax;
+	m_power=0.0;
+	for (int i=0;i<nb;i++){
+		m_power += mp_pixels[i].m_power;
+	}
+	
+	if (powerMax>0.0)
+		m_powerNorm = m_power/powerMax;
+	else
+		m_powerNorm = 0.0;
 }
 
 //--------------------------------------------------------------

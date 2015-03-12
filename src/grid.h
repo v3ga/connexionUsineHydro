@@ -38,6 +38,7 @@ class grid
 		animation*	getAnimation			(){return mp_animation;}
 
 		void		update					(float dt);
+		void		computePower			();
 		void		sendPixelsDmx			();
 		void		setPixelValue			(float value, int r, int c);
 		void		setPixelValue			(float value, int index);
@@ -47,6 +48,12 @@ class grid
 		void		endOffscreen			(){m_offscreen.end();}
 		void		renderOffscreen			(ofFbo& other);
 		ofFbo&		getOffscreen			(){return m_offscreen;}
+	
+		float		getPowerNorm			(){return m_powerNorm;}
+ 		float		m_power, m_powerNorm;
+
+
+		float		m_attenuation;			// how much pixels will be attenuated
 
    protected:
    		void			zeroAll					();
@@ -61,5 +68,7 @@ class grid
 		ofxDmx			m_dmx;
 		bool			m_isDmxSetup;
 		bool			m_isDmxEnable;
-
+ 
+ 
+ 
 };

@@ -28,8 +28,9 @@ class rqMessageManager
 
 		void					setup					();
 		void					update					(float dt);
-		void 					urlResponse		(ofHttpResponse& response);
+		void 					urlResponse				(ofHttpResponse& response);
 
+		float					m_period;
  
 
 	protected:
@@ -51,7 +52,6 @@ class rqMessageManager
 		string					m_urlRQInstallations;
 		string					m_url;
  
-		float					m_period;
 		float					m_timePeriod;
 		bool					m_isLoading;
 		bool					m_isLog;

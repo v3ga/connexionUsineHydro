@@ -7,6 +7,9 @@
 #include "animationWave.h"
 #include "animationScrolling.h"
 
+#include "toolGrid.h"
+#include "toolMessages.h"
+#include "toolAnimations.h"
 
 //--------------------------------------------------------------
 void ofApp::setup()
@@ -64,7 +67,20 @@ void ofApp::setup()
 			GLOBALS->setRQMessageManager(&m_rqMessageManager);
 
 			// Controls
+			toolGrid* 		pToolGrid 		= new toolGrid(&m_toolManager);
+			pToolGrid->setGrid(&m_grid);
+
+			toolMessages* 	pToolMessages 	= new toolMessages(&m_toolManager, &m_rqMessageManager);
+			toolAnimations* pToolAnimations = new toolAnimations(&m_toolManager);
+			pToolAnimations->setAnimation(mp_animation);
+			
+			m_toolManager.addTool(pToolGrid);
+			m_toolManager.addTool(pToolMessages);
+			m_toolManager.addTool(pToolAnimations);
+
 			m_toolManager.createControls(ofVec2f(ofGetWidth(),ofGetHeight()),ofVec2f(ofGetWidth(),ofGetHeight()));
+			m_toolManager.loadData();
+
 		}
 
 	OFAPPLOG->end();
@@ -73,6 +89,7 @@ void ofApp::setup()
 //--------------------------------------------------------------
 void ofApp::exit()
 {
+	m_toolManager.saveData();
 	delete mp_animation;
 }
 
@@ -88,6 +105,7 @@ void ofApp::update()
 	}
 	m_grid.update(dt);
 	m_grid.sendPixelsDmx();
+	m_toolManager.update();
 }
 
 //--------------------------------------------------------------

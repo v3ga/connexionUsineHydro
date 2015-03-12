@@ -105,6 +105,11 @@
 		F9D6C5121AA8BDD00063484D /* globals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9D6C5101AA8BDD00063484D /* globals.cpp */; };
 		F9F7FB451AB083C3001CCE1E /* toolGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7FB431AB083C3001CCE1E /* toolGrid.cpp */; };
 		F9F7FB481AB08F73001CCE1E /* messageScrolling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7FB461AB08F73001CCE1E /* messageScrolling.cpp */; };
+		F9F7FB4C1AB19B46001CCE1E /* toolMessages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7FB4A1AB19B46001CCE1E /* toolMessages.cpp */; };
+		F9F7FB501AB1A4BB001CCE1E /* toolAnimations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7FB4E1AB1A4BB001CCE1E /* toolAnimations.cpp */; };
+		F9F7FB541AB1D06E001CCE1E /* animScrollingCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7FB521AB1D06E001CCE1E /* animScrollingCanvas.cpp */; };
+		F9F7FB571AB1D11A001CCE1E /* animationCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7FB551AB1D11A001CCE1E /* animationCanvas.cpp */; };
+		F9F7FB5A1AB1E24F001CCE1E /* ofxUIMovingGraphThreshold.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7FB581AB1E24F001CCE1E /* ofxUIMovingGraphThreshold.cpp */; };
 		FB8AA9FA6535767BE31806BC /* ofxUIImageToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B848522CCA3A75ABD56752C9 /* ofxUIImageToggle.cpp */; };
 		FBD0CD0AFE3849C14E829CAF /* ofxUIImageSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B5F60B902BFFD95E99AAB34 /* ofxUIImageSampler.cpp */; };
 		FE0F1DB69ACCD163E9DA2A15 /* ofxUIRotarySlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64F3DE24F191ECED9DBE903C /* ofxUIRotarySlider.cpp */; };
@@ -394,6 +399,16 @@
 		F9F7FB441AB083C3001CCE1E /* toolGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolGrid.h; sourceTree = "<group>"; };
 		F9F7FB461AB08F73001CCE1E /* messageScrolling.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = messageScrolling.cpp; sourceTree = "<group>"; };
 		F9F7FB471AB08F73001CCE1E /* messageScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = messageScrolling.h; sourceTree = "<group>"; };
+		F9F7FB4A1AB19B46001CCE1E /* toolMessages.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toolMessages.cpp; sourceTree = "<group>"; };
+		F9F7FB4B1AB19B46001CCE1E /* toolMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolMessages.h; sourceTree = "<group>"; };
+		F9F7FB4E1AB1A4BB001CCE1E /* toolAnimations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toolAnimations.cpp; sourceTree = "<group>"; };
+		F9F7FB4F1AB1A4BB001CCE1E /* toolAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolAnimations.h; sourceTree = "<group>"; };
+		F9F7FB521AB1D06E001CCE1E /* animScrollingCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = animScrollingCanvas.cpp; sourceTree = "<group>"; };
+		F9F7FB531AB1D06E001CCE1E /* animScrollingCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animScrollingCanvas.h; sourceTree = "<group>"; };
+		F9F7FB551AB1D11A001CCE1E /* animationCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = animationCanvas.cpp; sourceTree = "<group>"; };
+		F9F7FB561AB1D11A001CCE1E /* animationCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animationCanvas.h; sourceTree = "<group>"; };
+		F9F7FB581AB1E24F001CCE1E /* ofxUIMovingGraphThreshold.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUIMovingGraphThreshold.cpp; sourceTree = "<group>"; };
+		F9F7FB591AB1E24F001CCE1E /* ofxUIMovingGraphThreshold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIMovingGraphThreshold.h; sourceTree = "<group>"; };
 		FBE1B379902B3C585DC8F7A2 /* ofxUILabelButton.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUILabelButton.h; path = ../../../addons/ofxUI/src/ofxUILabelButton.h; sourceTree = SOURCE_ROOT; };
 		FC5DA1C87211D4F6377DA719 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = tinyxmlparser.cpp; path = ../../../addons/ofxXmlSettings/libs/tinyxmlparser.cpp; sourceTree = SOURCE_ROOT; };
 		FCCBDB55B98DA36682809F03 /* ofxUIWaveform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUIWaveform.h; path = ../../../addons/ofxUI/src/ofxUIWaveform.h; sourceTree = SOURCE_ROOT; };
@@ -663,6 +678,7 @@
 			isa = PBXGroup;
 			children = (
 				F9F7FB421AB0834F001CCE1E /* tools */,
+				F9F7FB511AB1D04A001CCE1E /* ui */,
 				F935FA631AA9FFA800D7F08B /* libs */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
@@ -679,6 +695,8 @@
 				F9704D9E1AA4AFCF00E2FD89 /* gridPixel.h */,
 				F9704DA01AA4B87300E2FD89 /* animation.cpp */,
 				F9704DA11AA4B87300E2FD89 /* animation.h */,
+				F9F7FB551AB1D11A001CCE1E /* animationCanvas.cpp */,
+				F9F7FB561AB1D11A001CCE1E /* animationCanvas.h */,
 				F9704DA31AA4BA3300E2FD89 /* animationWave.cpp */,
 				F9704DA41AA4BA3300E2FD89 /* animationWave.h */,
 				F9D6C50D1AA8BD000063484D /* animationScrolling.cpp */,
@@ -924,8 +942,23 @@
 			children = (
 				F9F7FB431AB083C3001CCE1E /* toolGrid.cpp */,
 				F9F7FB441AB083C3001CCE1E /* toolGrid.h */,
+				F9F7FB4A1AB19B46001CCE1E /* toolMessages.cpp */,
+				F9F7FB4B1AB19B46001CCE1E /* toolMessages.h */,
+				F9F7FB4E1AB1A4BB001CCE1E /* toolAnimations.cpp */,
+				F9F7FB4F1AB1A4BB001CCE1E /* toolAnimations.h */,
 			);
 			name = tools;
+			sourceTree = "<group>";
+		};
+		F9F7FB511AB1D04A001CCE1E /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				F9F7FB581AB1E24F001CCE1E /* ofxUIMovingGraphThreshold.cpp */,
+				F9F7FB591AB1E24F001CCE1E /* ofxUIMovingGraphThreshold.h */,
+				F9F7FB521AB1D06E001CCE1E /* animScrollingCanvas.cpp */,
+				F9F7FB531AB1D06E001CCE1E /* animScrollingCanvas.h */,
+			);
+			name = ui;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1034,6 +1067,7 @@
 				F9704E8E1AA4F8AE00E2FD89 /* ofxJSVideoPlayer.cpp in Sources */,
 				F935FA661AAA117900D7F08B /* utils.cpp in Sources */,
 				F9704DA51AA4BA3300E2FD89 /* animationWave.cpp in Sources */,
+				F9F7FB541AB1D06E001CCE1E /* animScrollingCanvas.cpp in Sources */,
 				7BE46522B64E24FAEDE1A25D /* ofxUICanvas.cpp in Sources */,
 				F9D6C5121AA8BDD00063484D /* globals.cpp in Sources */,
 				DF0C851B244C4C867CEA8806 /* ofxUICircleSlider.cpp in Sources */,
@@ -1047,8 +1081,10 @@
 				7F2CD93F681F3C1547B3BF2C /* ofxUIImageButton.cpp in Sources */,
 				FBD0CD0AFE3849C14E829CAF /* ofxUIImageSampler.cpp in Sources */,
 				26874B150C8535AEA0F24C8C /* ofxUIImageSlider.cpp in Sources */,
+				F9F7FB5A1AB1E24F001CCE1E /* ofxUIMovingGraphThreshold.cpp in Sources */,
 				F9704E8D1AA4F8AE00E2FD89 /* ofxJSVideoGrabber.cpp in Sources */,
 				F9704DA21AA4B87300E2FD89 /* animation.cpp in Sources */,
+				F9F7FB4C1AB19B46001CCE1E /* toolMessages.cpp in Sources */,
 				F9F7FB451AB083C3001CCE1E /* toolGrid.cpp in Sources */,
 				FB8AA9FA6535767BE31806BC /* ofxUIImageToggle.cpp in Sources */,
 				7C3DC84C9BFCBD2866DB2B6C /* ofxUILabel.cpp in Sources */,
@@ -1083,6 +1119,7 @@
 				1DAAC3FB4B98B08AE63F4687 /* ofxUISuperCanvas.cpp in Sources */,
 				5AE95ADB5549701423B6DA48 /* ofxUITabBar.cpp in Sources */,
 				C961BE22AB9A8CCF037FC18F /* ofxUITextArea.cpp in Sources */,
+				F9F7FB571AB1D11A001CCE1E /* animationCanvas.cpp in Sources */,
 				F8D05F7C7F785CE323983B47 /* ofxUITextInput.cpp in Sources */,
 				F9F7FB481AB08F73001CCE1E /* messageScrolling.cpp in Sources */,
 				F9D6C50C1AA8A3350063484D /* rqMessageManager.cpp in Sources */,
@@ -1096,6 +1133,7 @@
 				AE281BEBF3A00F1FC37F3DA0 /* ofxUIWaveform.cpp in Sources */,
 				82845E1F8C90E1F5A99D9868 /* ofxUIWidget.cpp in Sources */,
 				F9D6C5091AA89FC70063484D /* rqMessage.cpp in Sources */,
+				F9F7FB501AB1A4BB001CCE1E /* toolAnimations.cpp in Sources */,
 				CE5D89B9893EAA12F511DCAC /* ofxUIWidgetWithLabel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
