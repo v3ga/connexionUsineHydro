@@ -74,6 +74,7 @@ void ofApp::setup()
 			toolAnimations* pToolAnimations = new toolAnimations(&m_toolManager);
 			pToolAnimations->setAnimation(mp_animation);
 			
+			m_toolManager.setLogo("images/logo.png");
 			m_toolManager.addTool(pToolGrid);
 			m_toolManager.addTool(pToolMessages);
 			m_toolManager.addTool(pToolAnimations);
