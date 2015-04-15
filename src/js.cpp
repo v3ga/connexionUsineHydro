@@ -60,7 +60,7 @@ bool setupJS()
 //--------------------------------------------------------------
 ofxJSDefineFunctionCpp(loadShader)
 {
-	animation* pAnimation = GLOBALS->mp_animation;
+	animation* pAnimation = GLOBALS->mp_animationCurrent;
 	if (argc==1 && pAnimation)
 	{
 		pAnimation->loadShader(ofxJSValue_TO_string(argv[0]));
@@ -73,7 +73,7 @@ ofxJSDefineFunctionCpp(loadShader)
 //--------------------------------------------------------------
 ofxJSDeclareFunctionCpp(beginShader)
 {
-	animation* pAnimation = GLOBALS->mp_animation;
+	animation* pAnimation = GLOBALS->mp_animationCurrent;
 	if (pAnimation)
 		pAnimation->beginShader();
 	return JS_TRUE;
@@ -82,7 +82,7 @@ ofxJSDeclareFunctionCpp(beginShader)
 //--------------------------------------------------------------
 ofxJSDeclareFunctionCpp(endShader)
 {
-	animation* pAnimation = GLOBALS->mp_animation;
+	animation* pAnimation = GLOBALS->mp_animationCurrent;
 	if (pAnimation)
 		pAnimation->endShader();
 
@@ -92,7 +92,7 @@ ofxJSDeclareFunctionCpp(endShader)
 //--------------------------------------------------------------
 ofxJSDeclareFunctionCpp(setUniform1fShader)
 {
-	animation* pAnimation = GLOBALS->mp_animation;
+	animation* pAnimation = GLOBALS->mp_animationCurrent;
 	if (argc==2 && pAnimation)
 	{
 		pAnimation->m_shader.setUniform1f(ofxJSValue_TO_string(argv[0]).c_str(), ofxJSValue_TO_float(argv[1]));
@@ -104,7 +104,7 @@ ofxJSDeclareFunctionCpp(setUniform1fShader)
 //--------------------------------------------------------------
 ofxJSDeclareFunctionCpp(setUniform2fShader)
 {
-	animation* pAnimation = GLOBALS->mp_animation;
+	animation* pAnimation = GLOBALS->mp_animationCurrent;
 	if (argc==3 && pAnimation)
 	{
 		pAnimation->m_shader.setUniform2f(ofxJSValue_TO_string(argv[0]).c_str(), ofxJSValue_TO_float(argv[1]), ofxJSValue_TO_float(argv[2]));

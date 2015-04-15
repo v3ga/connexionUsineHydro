@@ -18,6 +18,7 @@ animation::animation(string name)
 	mp_script 	= 0;
 	mp_obj		= 0;
 	m_scaleGridOffscreen = 1;
+	m_isRenderOffscreen = true;
 }
 
 //--------------------------------------------------------------

@@ -62,11 +62,13 @@ void gridView::draw(ofRectangle& rect)
 							ofNoFill();
 							ofSetColor(255.0f, 255.0f );
 							ofRect(0,0,stepx,stepy);
-					 
+							
 						 	if (m_isDrawChannelDmx)
 							{
-								ofSetColor((1.0f-pGridPixel->m_value)*255.0f);
-								ofDrawBitmapString( ofToString(pGridPixel->m_channelDmx)+"/"+ofToString((int)(pGridPixel->getValueDmx())), 4,12 );
+								//ofSetColor((1.0f-pGridPixel->m_value)*255.0f);
+								ofSetColor(255.0f);
+//								ofDrawBitmapString( ofToString(pGridPixel->m_channelDmx)+"/"+ofToString((int)(pGridPixel->getValueDmx())), 4,12 );
+								ofDrawBitmapString( ofToString(pGridPixel->m_channelDmx), 4,12 );
 							}
 					 
 

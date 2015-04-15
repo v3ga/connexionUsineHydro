@@ -12,6 +12,8 @@
 #include "ofAppLog.h"
 #include "utils.h"
 
+#define PIXEL_FONT_LOG	0
+
 //--------------------------------------------------------------
 pixelFont::pixelFont()
 {
@@ -69,8 +71,10 @@ bool pixelFont::load(string filename)
 					strValue 	= data.getAttribute("char", "c", "",i);
 					if (codePoint>0 && strValue!="" && strData!="")
 					{
+						#if PIXEL_FONT_LOG
 						OFAPPLOG->println("- adding letter (codePoint,char,data)=("+ofToString(codePoint)+","+strValue+","+strData+")");
-					
+						#endif
+						
 						m_letters.push_back( new pixelLetter(codePoint,m_rows,m_cols,strValue,strData) );
 
 					}
@@ -111,6 +115,9 @@ pixelLetter* pixelFont::getLetter(string value)
 //--------------------------------------------------------------
 string pixelFont::encodeString(string text)
 {
+	if (text == "")
+		return "";
+		
 	string s;
 
 	string::iterator it = text.begin();

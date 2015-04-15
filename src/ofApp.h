@@ -32,7 +32,28 @@ class ofApp : public ofBaseApp{
 		grid					m_grid;
 		gridView				m_gridView;
 		animation*				mp_animation;
+		animation*				mp_animationCurrent;
+		animation*				mp_animationWarmup;
 		toolManager				m_toolManager;
 		rqMessageManager		m_rqMessageManager;
+ 
+
+		int						m_appState;
+		float					m_timeState;
+		float					m_timeWarmup;
+		bool					m_skipWarmup;
+
+		void					skipWarmup		(){m_skipWarmup=true;}
+		void					setAnimCurrent	(animation* pAnimation);
+
+ 		enum
+		{
+			OFAPP_STATE_WARMP_UP		= 0,
+			OFAPP_STATE_SHOW_MSG		= 1,
+			OFAPP_STATE_SHOW_ANIMS		= 2
+		};
+
+
+
  
 };

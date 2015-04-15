@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<dmx enable="0">
+<dmx enable="1">
     <port>tty.usbserial-EN160423</port>
 </dmx>
 <animation>
@@ -8,3 +8,6 @@
 <messages>
 	<instalId>50</instalId>
 </messages>
+<warmup>
+	<time>2700</time>
+</warmup>

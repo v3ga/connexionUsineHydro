@@ -15,6 +15,12 @@ rqMessage::rqMessage()
 }
 
 //--------------------------------------------------------------
+rqMessage::~rqMessage()
+{
+	
+}
+
+//--------------------------------------------------------------
 void rqMessage::zeroAll()
 {
 	m_timestamp = 0;
@@ -24,9 +30,39 @@ void rqMessage::zeroAll()
 //--------------------------------------------------------------
 bool rqMessage::read(ofxXmlSettings& xml, int index)
 {
+	// Timestamp
 	m_timestamp = xml.getAttribute("msg", "timestamp", 0, index);
+	
+	// Text
 	m_text = xml.getValue("msg", "???", index);
+
+ 	// Words
+ 	xml.pushTag("msg", index);
+ 	xml.pushTag("words");
+	
+	int nbWords = xml.getNumTags("w");
+	string code = "";
+	for (int i=0;i<nbWords;i++)
+	{
+		code = xml.getAttribute("w", "code", "", i);
+		if (code != "")
+		{
+			m_words.push_back(code);
+		}
+	}
+
+	xml.popTag();
+	xml.popTag();
  
 	return true;
 }
 
+//--------------------------------------------------------------
+string rqMessage::getWord(int index)
+{
+	if (index < m_words.size())
+	{
+		return m_words.at(index);
+	}
+	return "";
+}

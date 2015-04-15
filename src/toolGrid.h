@@ -20,6 +20,7 @@ class toolGrid : public tool
 		 void				createControlsCustom	();
 		 void				setGrid					(grid* pGrid=0){mp_grid=pGrid;}
 		 void				update					();
+		 void				handleEvents			(ofxUIEventArgs& e);
 
 	protected:
 		grid*						mp_grid;

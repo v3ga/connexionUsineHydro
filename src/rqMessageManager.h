@@ -24,6 +24,7 @@ class rqMessageManager
  
 		rqMessage*				getMessage				();
 		rqMessage*				getMessageAt			(int index); // wont remove the message from list, use carefully
+		int						getMessageNb			();
  
 
 		void					setup					();
@@ -55,5 +56,7 @@ class rqMessageManager
 		float					m_timePeriod;
 		bool					m_isLoading;
 		bool					m_isLog;
+ 
+		ofMutex					m_mutex;
 };
 

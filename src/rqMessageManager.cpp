@@ -29,7 +29,7 @@ void rqMessageManager::zeroAll()
 	m_maxtimestamp = 0;
 	m_period = 0;
 	m_timePeriod = 0;
-	m_isLog = false;
+	m_isLog = true;
 	m_isLoading = false;
 }
 
@@ -78,33 +78,53 @@ void rqMessageManager::update(float dt)
 //--------------------------------------------------------------
 rqMessage* rqMessageManager::getMessage()
 {
+	rqMessage* pMessage = 0;
 	if (isLoading()==false)
 	{
+		m_mutex.lock();
 		if (m_messages.size()>0)
 		{
-			rqMessage* pMessage = m_messages[0];
+			pMessage = m_messages[0];
 			m_messages.erase( m_messages.begin() ); // remove first element
-			return pMessage; // let the caller delete this object when it is done with it
+
 		}
+		m_mutex.unlock();
 	}
-	return 0;
+	return pMessage;
 }
 
 //--------------------------------------------------------------
 rqMessage* rqMessageManager::getMessageAt(int index)
 {
+	m_mutex.lock();
+	rqMessage* pMessage = 0;
 	if (index < m_messages.size())
 	{
-		return m_messages[index];
+		pMessage = m_messages[index];
 	}
-	return 0;
+	m_mutex.unlock();
+	return pMessage;
 }
+
+//--------------------------------------------------------------
+int rqMessageManager::getMessageNb()
+{
+	int nb = 0;
+	m_mutex.lock();
+	nb = m_messages.size();
+	m_mutex.unlock();
+	return nb;
+}
+
 
 //--------------------------------------------------------------
 void rqMessageManager::loadNewMessages()
 {
+	beginLog("rqMessageManager::loadNewMessages()");
+	println(" - url="+m_url);
 	m_isLoading = true;
 	ofLoadURLAsync(m_url); // will call urlResponse function
+	endLog();
 }
 
 //--------------------------------------------------------------
@@ -134,6 +154,8 @@ void rqMessageManager::urlResponse(ofHttpResponse& response)
 		
 			println(" - nb messages="+ofToString(nbMessages));
 			
+					m_mutex.lock();
+
 			for (int i=0;i<nbMessages;i++)
 			{
 				rqMessage* pNewMessage = new rqMessage();
@@ -147,13 +169,14 @@ void rqMessageManager::urlResponse(ofHttpResponse& response)
 					delete pNewMessage;
 				}
 			}
+			m_mutex.unlock();
 		 
 			 xml.popTag();
 		 
 		}
 
-		m_isLoading = false;
 	}
+	m_isLoading = false;
 	endLog();
 }
 

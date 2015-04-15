@@ -1,5 +1,20 @@
 <Widget>
     <Kind>4</Kind>
-    <Name>speed</Name>
-    <Value>2.764062643</Value>
+    <Name>speedScrolling</Name>
+    <Value>3.157812357</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>timeIn</Name>
+    <Value>0.534999967</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>timeShow</Name>
+    <Value>1.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>timeOut</Name>
+    <Value>0.400000006</Value>
 </Widget>

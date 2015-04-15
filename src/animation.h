@@ -32,9 +32,11 @@ class animation
 		   // render to the grid offscreen
 		   virtual	void	render				();
 		   virtual	void	renderOffscreen		();
-		   virtual	bool	isRenderOffscreen	(){return true;}
+		   virtual	bool	isRenderOffscreen	(){return m_isRenderOffscreen;}
+		   virtual  void	setRenderOffscreen	(bool is=true){m_isRenderOffscreen=is;}
 		   			ofFbo&	getOffscreen		(){return m_offscreen;}
 			float			m_scaleGridOffscreen;
+			bool			m_isRenderOffscreen;
  
 		   // Utility
 		   //virtual void 	drawTextGrid		(string s, pixelFont*, int x=0, int y=0);
@@ -52,6 +54,8 @@ class animation
 		   void				deleteScript		();
 		
 			bool			isScript			(){return mp_script!=0;}
+ 
+			string			getStringDebug		(){return m_stringDebug;}
 
 	protected:
 			grid*			mp_grid;
@@ -67,4 +71,6 @@ class animation
 			void			callScriptUpdate			(float dt);
 			void			callScriptRenderOffscreen	();
 			void			callScriptSetGrid			();
+ 
+			string			m_stringDebug;
 };

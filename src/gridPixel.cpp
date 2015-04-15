@@ -30,7 +30,7 @@ void gridPixel::zeroAll()
 //--------------------------------------------------------------
 void gridPixel::setValue(float value)
 {
-	m_valueTarget = m_attenuation*value;
+	m_valueTarget = value;
 
 	if (m_isHistory)
 	{

@@ -19,6 +19,7 @@ class gridPixel
 		void			setChannelDmx	(int channelDmx){m_channelDmx = channelDmx;}
 		int				getValueDmx		(){return (int) ofMap(m_value,0.0f,1.0f,0,255);}
 		vector<float>&	getHistory		(){return m_valueHistory;}
+		float			setAttenuation	(float a){m_attenuation=a;}
 
 		void			update			(float dt);
 

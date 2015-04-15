@@ -17,9 +17,10 @@ Globals* Globals::smp_instance = 0;
 //--------------------------------------------------------------
 Globals::Globals()
 {
+	mp_app				= 0;
 	mp_pixelFontManager = 0;
 	mp_rqMessageManager	= 0;
-	mp_animation		= 0;
+	mp_animationCurrent	= 0;
 }
 
 //--------------------------------------------------------------

@@ -9,6 +9,8 @@
 #include "toolGrid.h"
 #include "grid.h"
 #include "ofxUIValuePlotter.h"
+#include "globals.h"
+#include "ofApp.h"
 
 //--------------------------------------------------------------
 toolGrid::toolGrid(toolManager* pParent) : tool("Grille",pParent)
@@ -34,6 +36,7 @@ void toolGrid::createControlsCustom()
 
 		if (mp_grid)
 		{
+			mp_canvas->addWidgetDown(new ofxUILabelButton("skip warmup", false, widthDefault, dim,0,0,OFX_UI_FONT_SMALL ));
 			mp_canvas->addWidgetDown(new ofxUISlider("attenuation", 0.0f, 1.0f, &mp_grid->m_attenuation, widthDefault, dim ));
 
 			mp_uiPlotterPower = new ofxUIValuePlotter(0,0,widthDefault,100,100,0.0f,1.0f,&mp_grid->m_powerNorm,"Power");
@@ -56,7 +59,7 @@ void toolGrid::update()
 		if (mp_uiPlotterPower)
 		{
 			m_timePlot+=dt;
-ofLog() << m_timePlot;
+//ofLog() << m_timePlot;
 			if (m_timePlot>=m_periodPlot)
 			{
 				mp_uiPlotterPower->addPoint( mp_grid->getPowerNorm() );
@@ -65,3 +68,18 @@ ofLog() << m_timePlot;
 		}
 	}
 }
+
+//--------------------------------------------------------------
+void toolGrid::handleEvents(ofxUIEventArgs& e)
+{
+	string name = e.getName();
+	if (name == "skip warmup")
+	{
+		ofxUILabelButton* pButton = (ofxUILabelButton*) e.getButton();
+		if (pButton->getValue()){
+			APP->skipWarmup();
+		}
+	}
+
+}
+

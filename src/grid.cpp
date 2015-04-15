@@ -103,7 +103,7 @@ bool grid::setupDmx(ofxXmlSettings& settings)
 	{
 		string port = settings.getValue("dmx:port", "???");
 		m_isDmxSetup	= false;
-		if ( m_dmx.connect(port) )
+		if ( m_dmx.connect(port,72) )
 		{
 			OFAPPLOG->println("- OK connected to bus "+port);
 			m_isDmxSetup = true;
@@ -163,23 +163,34 @@ void grid::setAnimation(animation* pAnimation)
 //--------------------------------------------------------------
 void grid::update(float dt)
 {
-	// Offscreen > pixels
-	m_offscreen.readToPixels(m_offscreenFloatPix);
-
-	ofFloatColor color;
-	gridPixel* pGridPixel = 0;
-	for (int r=0;r<m_rows;r++)
+	if (mp_animation->isRenderOffscreen())
 	{
-		for (int c=0;c<m_cols;c++)
-		{
-			color = m_offscreenFloatPix.getColor(c,r);
+		// Offscreen > pixels
+		m_offscreen.readToPixels(m_offscreenFloatPix);
 
-			pGridPixel = mp_pixels+(c+r*m_cols);
-			pGridPixel->setValue( m_attenuation*color[0] );
-			pGridPixel->update(dt);
+		ofFloatColor color;
+		gridPixel* pGridPixel = 0;
+		for (int r=0;r<m_rows;r++)
+		{
+			for (int c=0;c<m_cols;c++)
+			{
+				color = m_offscreenFloatPix.getColor(c,r);
+				setPixelValue(color[0], r,c);
+			}
 		}
 	}
-	
+	else
+	{
+		// Anim address
+	}
+
+	// Update pixels
+	for (int i=0;i<getPixelsNb();i++)
+	{
+		mp_pixels[i].update(dt);
+	}
+
+	// compute power
 	computePower();
 }
 
@@ -222,7 +233,7 @@ void grid::setPixelValue(float value, int r, int c)
 {
 	if (mp_pixels && (r<m_rows && c<m_cols))
 	{
-		mp_pixels[c+r*m_cols].setValue(value);
+		mp_pixels[c+r*m_cols].setValue(m_attenuation*value);
 	}
 }
 
@@ -231,7 +242,7 @@ void grid::setPixelValue(float value, int index)
 {
 	if (mp_pixels && index<getPixelsNb())
 	{
-		mp_pixels[index].setValue(value);
+		mp_pixels[index].setValue(m_attenuation*value);
 	}
 }
 
