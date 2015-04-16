@@ -56,10 +56,36 @@ void rqMessageManager::setPeriod(float p, bool isImmediate)
 	if (isImmediate) m_timePeriod = m_period;
 }
 
+//--------------------------------------------------------------
+void rqMessageManager::saveTimestampFile(int ts)
+{
+	ofxXmlSettings xml;
+	xml.setValue("timestamp", ts);
+	xml.saveFile("timestamp.xml");
+}
+
+//--------------------------------------------------------------
+void rqMessageManager::loadTimestampFile()
+{
+	OFAPPLOG->begin("rqMessageManager::loadTimestampFile()");
+	m_maxtimestamp = 0;
+
+	ofxXmlSettings xml;
+	if (xml.loadFile("timestamp.xml"))
+	{
+		OFAPPLOG->println(" - ok loaded the file 'timestamp.xml'");
+		m_maxtimestamp = xml.getValue("timestamp", 0);
+	}
+	OFAPPLOG->println(" - m_maxtimestamp="+ofToString(m_maxtimestamp));
+	OFAPPLOG->end();
+}
+
 
 //--------------------------------------------------------------
 void rqMessageManager::setup()
 {
+	loadTimestampFile();
+	updateURL();
 	ofRegisterURLNotification(this);
 }
 
@@ -144,7 +170,7 @@ void rqMessageManager::urlResponse(ofHttpResponse& response)
 		if ( xml.loadFromBuffer(data) )
 		{
 			// Maxtimestamp
-			m_maxtimestamp = xml.getAttribute("messages", "maxtimestamp",0);
+			m_maxtimestamp = xml.getAttribute("messages", "maxtimestamp", 0);
 			println(" - m_maxtimestamp="+ofToString(m_maxtimestamp));
 			updateURL();
 			

@@ -61,15 +61,18 @@ void ofApp::setup()
 			mp_animationWarmup->setup();
 			mp_animationWarmup->setGrid(&m_grid);
 
-			if (false && animScript != "___EMPTY___")
+			// Transition
+
+			//if (false && animScript != "___EMPTY___")
 			{
-				mp_animation = new animation(animScript);
+				mp_animationTransition = new animation(animScript);
+				setAnimCurrent(mp_animationTransition); // for loadShader function
 				string pathScript = ofFilePath::getAbsolutePath("js/"+animScript, true);
-				mp_animation->loadScript(pathScript.c_str());
-				mp_animation->setup();
-				mp_animation->setGrid(&m_grid);
+				mp_animationTransition->loadScript(pathScript.c_str());
+				mp_animationTransition->setup();
+				mp_animationTransition->setGrid(&m_grid);
 			}
-			else
+			//else
 			{
 //				mp_animation = new animationScrolling();
 				mp_animation = new animationWords();
@@ -124,6 +127,7 @@ void ofApp::exit()
 	m_toolManager.saveData();
 	delete mp_animation;
 	delete mp_animationWarmup;
+	delete mp_animationTransition;
 }
 
 //--------------------------------------------------------------
@@ -131,6 +135,9 @@ void ofApp::update()
 {
 	float dt = ofGetLastFrameTime();
 	m_timeState += dt;
+
+	m_rqMessageManager.update(dt);
+	m_toolManager.update();
 
 	// State changes
 	if (m_appState == OFAPP_STATE_WARMP_UP)
@@ -144,12 +151,61 @@ void ofApp::update()
 		}
 	}
 	else
+	if (m_appState == OFAPP_STATE_SHOW_MSG)
 	{
+		// No more messages in db & animation not doing things
+		if (RQMESSAGES->getMessageNb() == 0 && !mp_animationCurrent->isActive())
+		{
+			 m_timeState = 0.0f;
+//			 m_appState = OFAPP_STATE_SHOW_ANIMS_WAIT;
+			 m_appState = OFAPP_STATE_SHOW_ANIMS;
+			 mp_animationTransition->setAlphaRectOver(1.0f);
+			 mp_animationTransition->setAlphaRectOverTarget(0.0f);
+			 mp_animationTransition->setup();
+			 setAnimCurrent(mp_animationTransition);
+		}
+	}
+/*	else
+	if (m_appState == OFAPP_STATE_SHOW_ANIMS_WAIT)
+	{
+		// Wait before showing animation
+		if (m_timeState >= 5.0f)
+		{
+			m_timeState = 0.0f;
+			 m_appState = OFAPP_STATE_SHOW_ANIMS;
+			 setAnimCurrent(mp_animationTransition);
+		}
+	}
+*/
+	else
+	if (m_appState == OFAPP_STATE_SHOW_ANIMS)
+	{
+		// New message !
+		if (RQMESSAGES->getMessageNb()>0)
+		{
+			 m_timeState = 0.0f;
+//			 m_appState = OFAPP_STATE_SHOW_MSG;
+
+			 mp_animationTransition->setAlphaRectOver(0.0f);
+			 mp_animationTransition->setAlphaRectOverTarget(1.0f);
+
+			m_appState = OFAPP_STATE_SHOW_MSG_TRANSITION;
+
+//			 setAnimCurrent(mp_animation);
+		}
+	}
+	else
+	if (m_appState == OFAPP_STATE_SHOW_MSG_TRANSITION)
+	{
+	 	if (mp_animationTransition && mp_animationTransition->m_alphaRectOverTarget >= 0.99f){
+			m_timeState = 0.0f;
+			m_appState = OFAPP_STATE_SHOW_MSG;
+			setAnimCurrent(mp_animation);
+		}
 	}
 
 
-	m_rqMessageManager.update(dt);
-	m_toolManager.update();
+
 
 	if (mp_animationCurrent){
 		mp_animationCurrent->update(dt);
@@ -193,10 +249,13 @@ void ofApp::draw()
 	}
 
 
-	if (mp_animationCurrent && mp_animationCurrent->getStringDebug()!="")
+	if (mp_animationCurrent)
 	{
 		ofSetColor(255);
-		ofDrawBitmapString(mp_animationCurrent->getStringDebug(), 5, ofGetHeight()-24);
+		m_stringDebug = "app state="+getStateAsString();
+		
+		m_stringDebug+="\n"+mp_animationCurrent->getStringDebug();
+		ofDrawBitmapString(m_stringDebug, 5, ofGetHeight()-3*12);
 	}
 }
 
@@ -256,4 +315,16 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+//--------------------------------------------------------------
+string ofApp::getStateAsString()
+{
+	if (m_appState == OFAPP_STATE_WARMP_UP) return "Warm up";
+	if (m_appState == OFAPP_STATE_SHOW_MSG) return "Showing messages";
+	if (m_appState == OFAPP_STATE_SHOW_ANIMS) return "Showing animations";
+	if (m_appState == OFAPP_STATE_SHOW_ANIMS_WAIT) return "Showing animations (wait)";
+	if (m_appState == OFAPP_STATE_SHOW_MSG_TRANSITION) return "Transition to messages";
+
+	return "???";
 }

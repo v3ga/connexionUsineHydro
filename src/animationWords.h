@@ -25,6 +25,8 @@ public:
 		void					renderOffscreen		();
 		void					setGrid				(grid*, float scaleForOffscreen);
 		void					drawString			(string textEncoded, float x, float y);
+		bool					isActive			();
+
 
 		float					m_wordSpeedScrolling;		// pixels per second
 		float					m_timeWordShow;

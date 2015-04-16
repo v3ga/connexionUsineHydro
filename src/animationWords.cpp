@@ -49,6 +49,13 @@ string animationWords::getStateAsString()
 }
 
 //--------------------------------------------------------------
+bool animationWords::isActive()
+{
+	return (m_state != HAS_NO_MESSAGE);
+}
+
+
+//--------------------------------------------------------------
 void animationWords::setGrid(grid* pGrid, float scaleForOffscreen)
 {
 	animation::setGrid(pGrid, scaleForOffscreen);
@@ -136,6 +143,10 @@ void animationWords::update(float dt)
 		mp_message = RQMESSAGES->getMessage();
 		if (mp_message)
 		{
+			RQMESSAGES->saveTimestampFile(mp_message->m_timestamp);
+
+
+
 			m_timeState = 0;
 			m_indexWordMessage = 0;
 			

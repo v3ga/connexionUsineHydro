@@ -32,6 +32,9 @@ bool rqMessage::read(ofxXmlSettings& xml, int index)
 {
 	// Timestamp
 	m_timestamp = xml.getAttribute("msg", "timestamp", 0, index);
+
+	if (m_timestamp == 1427821942) // for debug purpose, message is too long
+		return false;
 	
 	// Text
 	m_text = xml.getValue("msg", "???", index);

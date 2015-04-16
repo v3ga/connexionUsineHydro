@@ -20,6 +20,8 @@ class rqMessageManager
 		void					setURLRQInstallations	(string url){m_urlRQInstallations=url;updateURL();}
 		void					setLog					(bool is=true){m_isLog = is;}
 		void					setPeriod				(float p, bool isImmediate=false);
+		void					saveTimestampFile		(int ts);
+		void					loadTimestampFile		();
  		bool					isLoading				(){return m_isLoading;}
  
 		rqMessage*				getMessage				();

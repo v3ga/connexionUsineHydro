@@ -52,6 +52,8 @@ class grid
 		float		getPowerNorm			(){return m_powerNorm;}
  		float		m_power, m_powerNorm;
 
+ 
+
 
 		float		m_attenuation;			// how much pixels will be attenuated
 

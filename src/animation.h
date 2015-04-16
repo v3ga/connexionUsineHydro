@@ -35,17 +35,29 @@ class animation
 		   virtual	bool	isRenderOffscreen	(){return m_isRenderOffscreen;}
 		   virtual  void	setRenderOffscreen	(bool is=true){m_isRenderOffscreen=is;}
 		   			ofFbo&	getOffscreen		(){return m_offscreen;}
+
 			float			m_scaleGridOffscreen;
 			bool			m_isRenderOffscreen;
+
+
+			void			setAlphaRectOverTarget	(float a){m_alphaRectOverTarget=a;}
+			void			setAlphaRectOver		(float a){m_alphaRectOver=a;}
+ 			float			m_alphaRectOver,m_alphaRectOverTarget;
+
  
 		   // Utility
 		   //virtual void 	drawTextGrid		(string s, pixelFont*, int x=0, int y=0);
  
-		   // shader stuf
+		   // shader stuff
 			void			beginShader			();
 			void			endShader			();
 			void			loadShader			(string name);
 			ofShader		m_shader;
+ 
+ 
+ 
+ 			// Activity
+			virtual	bool	isActive			(){return false;}
  
 
 		   // scripts

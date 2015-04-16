@@ -19,6 +19,8 @@ animation::animation(string name)
 	mp_obj		= 0;
 	m_scaleGridOffscreen = 1;
 	m_isRenderOffscreen = true;
+	m_alphaRectOver = 0.0f;
+	m_alphaRectOverTarget = 0.0f;
 }
 
 //--------------------------------------------------------------
@@ -46,6 +48,9 @@ void animation::setup()
 void animation::update(float dt)
 {
 	callScriptUpdate(dt);
+
+	m_alphaRectOver += (m_alphaRectOverTarget-m_alphaRectOver)*0.95*dt;
+//	ofLog()<<"alpha="<<m_alphaRectOver;
 }
 
 //--------------------------------------------------------------
@@ -55,7 +60,19 @@ void animation::render()
 	{
 		m_offscreen.begin();
 		renderOffscreen();
+
+		if (m_alphaRectOver>=0.01f)
+		{
+			// ofLog() << m_alphaRectOver;
+			ofPushStyle();
+			ofEnableAlphaBlending();
+			ofSetColor(0,m_alphaRectOver*255.0f);
+			ofRect(0,0,m_offscreen.getWidth(),m_offscreen.getHeight());
+			ofDisableAlphaBlending();
+			ofPopStyle();
+		}
 		m_offscreen.end();
+
 
 		if (mp_grid)
 		{

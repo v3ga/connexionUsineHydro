@@ -9,7 +9,7 @@
 #include "grid.h"
 #include "animation.h"
 #include "ofAppLog.h"
-
+#include "dmxMap.h"
 
 //--------------------------------------------------------------
 grid::grid()
@@ -136,7 +136,8 @@ void grid::setChannelsDmx(int channelStart)
 		{
 			for (int c=0;c<m_cols;c++)
 			{
-				mp_pixels[c+r*m_cols].setChannelDmx(channel++);
+				mp_pixels[c+r*m_cols].setChannelDmx( dmxMap::getChannel(channel));
+				channel += 1;
 			}
 		}
 	}

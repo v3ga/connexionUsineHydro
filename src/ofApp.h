@@ -34,6 +34,7 @@ class ofApp : public ofBaseApp{
 		animation*				mp_animation;
 		animation*				mp_animationCurrent;
 		animation*				mp_animationWarmup;
+		animation*				mp_animationTransition;
 		toolManager				m_toolManager;
 		rqMessageManager		m_rqMessageManager;
  
@@ -48,12 +49,15 @@ class ofApp : public ofBaseApp{
 
  		enum
 		{
-			OFAPP_STATE_WARMP_UP		= 0,
-			OFAPP_STATE_SHOW_MSG		= 1,
-			OFAPP_STATE_SHOW_ANIMS		= 2
+			OFAPP_STATE_WARMP_UP			= 0,
+			OFAPP_STATE_SHOW_MSG			= 1,
+			OFAPP_STATE_SHOW_ANIMS			= 2,
+			OFAPP_STATE_SHOW_ANIMS_WAIT		= 3,
+			OFAPP_STATE_SHOW_MSG_TRANSITION = 4
 		};
-
-
+ 
+		string					getStateAsString();
+		string					m_stringDebug;
 
  
 };

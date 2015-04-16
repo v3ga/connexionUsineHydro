@@ -27,3 +27,4 @@ void animationWordsCanvas::createControls()
 		addWidgetDown(new ofxUISlider("timeOut", 0.2f, 1.0f, &mp_animWords->m_timeWordOut, m_widthDefault, 20 ));
 	}
 }
+
