@@ -10,8 +10,8 @@
 </Widget>
 <Widget>
     <Kind>4</Kind>
-    <Name>timeShow</Name>
-    <Value>2.712500095</Value>
+    <Name>timeShowPerLetter</Name>
+    <Value>0.300000012</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>

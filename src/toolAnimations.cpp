@@ -27,14 +27,11 @@ void toolAnimations::setAnimation(animation* pAnimation)
 //--------------------------------------------------------------
 void toolAnimations::createControls(string fontName, ofVec2f posCanvas, ofVec2f dimCanvas)
 {
-
 	// TEMP : may be a factory here
 	mp_animationCanvas = new animationWordsCanvas((animationWords*) mp_animation);
 	mp_animationCanvas->createControls();
 
 	mp_canvas = mp_animationCanvas;
-
-//	mp_canvas = new ofxUICanvas();
 
 	createControlsCustom();
 }

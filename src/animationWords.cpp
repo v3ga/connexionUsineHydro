@@ -29,6 +29,7 @@ animationWords::animationWords() : animation("Words")
 	m_state = HAS_NO_MESSAGE;
 	m_timeWordIn			= 0.4f;
 	m_timeWordOut			= 0.4f;
+	m_timeShowPerLetter		= 0.15f;
 }
 
 //--------------------------------------------------------------
@@ -99,6 +100,10 @@ int animationWords::selectNextWord()
 	{
 		m_word = mp_pixelFont->encodeString( mp_message->getWord(m_indexWordMessage) );
 		m_wordLength = getWordLength(m_word);
+		
+		m_timeWordShow = m_wordLength/3 * m_timeShowPerLetter;
+		if (m_wordLength/3>=8)
+			m_timeWordShow=2.0;
 
 		if (m_wordLength<=mp_grid->getCols())
 		{
@@ -133,7 +138,7 @@ void animationWords::update(float dt)
 	   m_stringDebug +=  " / message = "+mp_message->m_text;
 
 		if (m_word != "")
-			m_stringDebug +=  " / word="+m_word;
+			m_stringDebug +=  " / word="+m_word + " / timeShow="+ofToString(m_timeWordShow);
 	}
 
 	// ----------------------------------------
@@ -275,7 +280,7 @@ float animationWords::getWordAlpha(float t)
 			float c 	= m_timeWordIn+m_timeWordShow;
 			
 			// pente = 1
-			ofLog() << 1.0/(tMax-c)*(tMax-t);
+			// ofLog() << 1.0/(tMax-c)*(tMax-t);
 			
 			return 1.0/(tMax-c)*(tMax-t);
 		}

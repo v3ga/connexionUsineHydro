@@ -62,23 +62,17 @@ void ofApp::setup()
 			mp_animationWarmup->setGrid(&m_grid);
 
 			// Transition
+			mp_animationTransition = new animation(animScript);
+			setAnimCurrent(mp_animationTransition); // for loadShader function
+			string pathScript = ofFilePath::getAbsolutePath("js/"+animScript, true);
+			mp_animationTransition->loadScript(pathScript.c_str());
+			mp_animationTransition->setup();
+			mp_animationTransition->setGrid(&m_grid);
 
-			//if (false && animScript != "___EMPTY___")
-			{
-				mp_animationTransition = new animation(animScript);
-				setAnimCurrent(mp_animationTransition); // for loadShader function
-				string pathScript = ofFilePath::getAbsolutePath("js/"+animScript, true);
-				mp_animationTransition->loadScript(pathScript.c_str());
-				mp_animationTransition->setup();
-				mp_animationTransition->setGrid(&m_grid);
-			}
-			//else
-			{
-//				mp_animation = new animationScrolling();
-				mp_animation = new animationWords();
-				mp_animation->setup();
-				mp_animation->setGrid(&m_grid);
-			}
+			// Animation messages
+			mp_animation = new animationWords();
+			mp_animation->setup();
+			mp_animation->setGrid(&m_grid);
 
 			setAnimCurrent(mp_animationWarmup);
 

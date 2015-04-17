@@ -23,8 +23,7 @@ void animationWordsCanvas::createControls()
 	{
 		addWidgetDown(new ofxUISlider("speedScrolling", 0.5f, 4.0f, &mp_animWords->m_wordSpeedScrolling, m_widthDefault, 20 ));
 		addWidgetDown(new ofxUISlider("timeIn", 0.2f, 1.0f, &mp_animWords->m_timeWordIn, m_widthDefault, 20 ));
-		addWidgetDown(new ofxUISlider("timeShow", 1.0f, 5.0f, &mp_animWords->m_timeWordShow, m_widthDefault, 20 ));
+		addWidgetDown(new ofxUISlider("timeShowPerLetter", 0.05f, 0.6f, &mp_animWords->m_timeShowPerLetter, m_widthDefault, 20 ));
 		addWidgetDown(new ofxUISlider("timeOut", 0.2f, 1.0f, &mp_animWords->m_timeWordOut, m_widthDefault, 20 ));
 	}
 }
-

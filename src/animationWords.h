@@ -31,6 +31,7 @@ public:
 		float					m_wordSpeedScrolling;		// pixels per second
 		float					m_timeWordShow;
 		float					m_timeWordIn,m_timeWordOut;
+		float					m_timeShowPerLetter;
 
 
  	protected:
