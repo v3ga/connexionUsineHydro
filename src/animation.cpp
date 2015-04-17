@@ -112,12 +112,12 @@ void animation::loadShader(string name)
 bool animation::loadScript(const char* s)
 {
 	OFAPPLOG->begin("animation::loadScript("+ofToString(s)+")");
-	m_pathAbsScript=s;
+	m_pathAbsScript = s;
+	OFAPPLOG->println("m_pathAbsScript=("+m_pathAbsScript+")");
 
-	string pathAbs = s;
-	if (pathAbs != "")
+	if (m_pathAbsScript != "")
 	{
-		mp_script = ofxJSLoad(pathAbs,"___tmpScript___");
+		mp_script = ofxJSLoad(m_pathAbsScript,"___tmpScript___");
 		if (mp_script)
 		{
 			mp_obj = JS_NewObject(ofxJSGetContext(), NULL, NULL, ofxJSGetGlobalObj());
@@ -128,7 +128,11 @@ bool animation::loadScript(const char* s)
 			if (ofxJSEvalOnObject(mp_script, mp_obj))
 			{
 				OFAPPLOG->println("OK evaluated '"+ofToString(s)+"'");
+				OFAPPLOG->println("m_pathAbsScript=("+m_pathAbsScript+")");
+
 				OFAPPLOG->end();
+
+
 				return true;
 			}
 			else{
@@ -162,7 +166,11 @@ void animation::deleteScript()
 //--------------------------------------------------------------
 bool animation::reloadScript()
 {
-	return loadScript(m_pathAbsScript.c_str());
+	OFAPPLOG->begin("animation::reloadScript()");
+	OFAPPLOG->println("m_pathAbsScript="+m_pathAbsScript);
+	bool is = loadScript(m_pathAbsScript.c_str());
+	OFAPPLOG->end();
+	return is;
 }
 
 

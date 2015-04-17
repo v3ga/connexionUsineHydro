@@ -3,3 +3,8 @@
     <Name>period grab</Name>
     <Value>3.000000000</Value>
 </Widget>
+<Widget>
+    <Kind>12</Kind>
+    <Name>maxtimestamp</Name>
+    <Value>1429273247</Value>
+</Widget>

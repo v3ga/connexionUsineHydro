@@ -1,0 +1,26 @@
+//--------------------------------------------------------------
+// called once when instanced
+function setup()
+{
+}
+
+//--------------------------------------------------------------
+function setGrid(rows,cols)
+{
+	this.grid = new Grid(rows,cols);
+}
+
+//--------------------------------------------------------------
+function renderOffscreen(w,h)
+{
+	of.Background(0,0,0);
+
+}
+
+//--------------------------------------------------------------
+function update(dt)
+{
+
+	return null;	
+}
+

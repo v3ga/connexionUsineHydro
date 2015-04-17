@@ -3,7 +3,12 @@
     <port>tty.usbserial-EN160423</port>
 </dmx>
 <animation>
-	<name>animPlasma.js</name>
+	<!--
+	<name>animBlinkLines.js</name>
+	<name>animWorm.js</name>
+	<name>animWorm2.js</name>
+	-->
+	<name>animPhare.js</name>
 </animation>
 <messages>
 	<instalId>50</instalId>

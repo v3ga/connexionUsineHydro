@@ -103,7 +103,7 @@ bool grid::setupDmx(ofxXmlSettings& settings)
 	{
 		string port = settings.getValue("dmx:port", "???");
 		m_isDmxSetup	= false;
-		if ( m_dmx.connect(port,72) )
+		if ( m_dmx.connect(port,80) )
 		{
 			OFAPPLOG->println("- OK connected to bus "+port);
 			m_isDmxSetup = true;

@@ -27,6 +27,8 @@ rqMessageManager::~rqMessageManager()
 void rqMessageManager::zeroAll()
 {
 	m_maxtimestamp = 0;
+	m_desiredtimestamp = 0;
+	m_bResetTimestamp = false;
 	m_period = 0;
 	m_timePeriod = 0;
 	m_isLog = true;
@@ -36,7 +38,20 @@ void rqMessageManager::zeroAll()
 //--------------------------------------------------------------
 void rqMessageManager::updateURL()
 {
+	OFAPPLOG->begin("rqMessageManager::updateURL()");
+
+	if (m_bResetTimestamp)
+	{
+		 m_maxtimestamp = m_desiredtimestamp;
+		 m_bResetTimestamp = false;
+		 m_mutex.lock();
+		 deleteMessages();
+		 m_mutex.unlock();
+	}
+
 	m_url = m_urlRQInstallations+"api.php?action=getMessages&instalId="+ofToString(m_instalId)+"&lastTimestamp="+ofToString(m_maxtimestamp);
+	OFAPPLOG->println("m_url="+m_url);
+	OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------
@@ -87,6 +102,14 @@ void rqMessageManager::setup()
 	loadTimestampFile();
 	updateURL();
 	ofRegisterURLNotification(this);
+}
+
+//--------------------------------------------------------------
+void rqMessageManager::setTimestamp(int ts)
+{
+	OFAPPLOG->println("rqMessageManager::setTimestamp("+ofToString(ts)+")");
+	m_desiredtimestamp = ts;
+	m_bResetTimestamp = true;
 }
 
 //--------------------------------------------------------------

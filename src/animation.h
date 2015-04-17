@@ -68,6 +68,7 @@ class animation
 			bool			isScript			(){return mp_script!=0;}
  
 			string			getStringDebug		(){return m_stringDebug;}
+			string			m_pathAbsScript;
 
 	protected:
 			grid*			mp_grid;
@@ -75,7 +76,6 @@ class animation
  
 			ofFbo			m_offscreen;
 
-			string			m_pathAbsScript;
 			ofxJSScript*	mp_script;
 			JSObject*		mp_obj;
  

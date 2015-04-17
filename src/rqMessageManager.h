@@ -27,6 +27,11 @@ class rqMessageManager
 		rqMessage*				getMessage				();
 		rqMessage*				getMessageAt			(int index); // wont remove the message from list, use carefully
 		int						getMessageNb			();
+
+ 		void					setTimestamp			(int ts);
+		int						getMaxTimestamp			(){return m_maxtimestamp;}
+ 
+ 
  
 
 		void					setup					();
@@ -50,6 +55,8 @@ class rqMessageManager
 
 		vector<rqMessage*>		m_messages;
 		int						m_maxtimestamp;
+		int						m_desiredtimestamp;
+		bool					m_bResetTimestamp;
 
 		int						m_instalId;
 		string					m_urlRQInstallations;

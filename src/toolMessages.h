@@ -14,9 +14,13 @@ class toolMessages : public tool
 {
 	public:
 		 toolMessages			(toolManager* pParent,rqMessageManager* pManager);
-		 void					createControlsCustom();
+		 void					createControlsCustom	();
+		 void					update					();
+		 void					handleEvents			(ofxUIEventArgs& e);
 
 
 		rqMessageManager*		mp_messagesManager;
+		ofxUITextInput*			mp_teMaxtimestamp;
+		ofxUILabel*				mp_lblCurrentTimestamp;
 };
 

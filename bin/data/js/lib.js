@@ -1,3 +1,43 @@
+// --------------------------------------------------------
+// --------------------------------------------------------
+function Worm(grid)
+{
+	this.grid = grid;
+	this.x = 0;
+	this.y = 0;
+	this.dirx = 0;
+	this.frameCount = 0;
+	this.frameSpeed = 25;
+
+	this.reset = function()
+	{
+		this.dirx = Math.random() < 0.5 ? -1 : 1;
+		this.x = this.dirx >0 ? grid.x : grid.x+grid.w;
+		this.y = Math.random() < 0.5 ? 0 : 1;
+		this.frameSpeed = 12;
+		this.frameCount = 0;
+	}
+
+	this.update = function()
+	{
+		this.frameCount++;
+
+		if (this.frameCount%this.frameSpeed==0)
+		{		
+			this.x += this.dirx;
+			this.y = Math.random() < 0.5 ? 0 : 1;
+			if (this.x>(this.grid.x+this.grid.w))
+			{
+				this.reset();
+				return 1;
+			}
+		}
+		return 0;
+	}
+}
+
+// --------------------------------------------------------
+// --------------------------------------------------------
 function Grid(rows,cols)
 {
 	this.rows = rows;
@@ -75,6 +115,14 @@ function Grid(rows,cols)
 		of.Rect(x*wPixel,y*hPixel,wPixel,hPixel);
 	}
 
+	this.drawLineH = function(x1,x2,y)
+	{
+		var wPixel = this.offscreenw/this.cols;
+		var hPixel = this.offscreenh/this.rows;
+
+		of.SetColor(255,255,255);
+		of.Rect(x1*wPixel, y*hPixel, (x2-x1)*wPixel, hPixel);
+	}
 
 
 	this.draw = function (w,h)
@@ -95,4 +143,12 @@ function Grid(rows,cols)
 		}
 	}
 
+}
+
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+function getRandomInt(min, max) 
+{
+  return Math.floor(Math.random() * (max - min)) + min;
 }

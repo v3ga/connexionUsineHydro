@@ -69,6 +69,7 @@ void ofApp::setup()
 			mp_animationTransition->setup();
 			mp_animationTransition->setGrid(&m_grid);
 
+
 			// Animation messages
 			mp_animation = new animationWords();
 			mp_animation->setup();
@@ -130,7 +131,7 @@ void ofApp::update()
 	float dt = ofGetLastFrameTime();
 	m_timeState += dt;
 
-	m_rqMessageManager.update(dt);
+//	m_rqMessageManager.update(dt);
 	m_toolManager.update();
 
 	// State changes
@@ -202,6 +203,7 @@ void ofApp::update()
 
 
 	if (mp_animationCurrent){
+
 		mp_animationCurrent->update(dt);
 		mp_animationCurrent->render();
 	}
@@ -262,7 +264,7 @@ void ofApp::keyPressed(int key)
 		{
 			if (mp_animationCurrent->isScript())
 			{
-				bool reloadedScript = mp_animation->reloadScript();
+				bool reloadedScript = mp_animationCurrent->reloadScript();
 		 		OFAPPLOG->println(" - reloaded script "+ofToString(reloadedScript));
 				mp_animationCurrent->setGrid(&m_grid);
 				mp_animationCurrent->setup();
