@@ -111,7 +111,6 @@
 		F9F7FB571AB1D11A001CCE1E /* animationCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7FB551AB1D11A001CCE1E /* animationCanvas.cpp */; };
 		F9F7FB5A1AB1E24F001CCE1E /* ofxUIMovingGraphThreshold.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9F7FB581AB1E24F001CCE1E /* ofxUIMovingGraphThreshold.cpp */; };
 		F9FC28FF1ADE6474001B7023 /* animationWords.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9FC28FD1ADE6474001B7023 /* animationWords.cpp */; };
-		F9FC29071ADE9B12001B7023 /* gridTiming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9FC29051ADE9B12001B7023 /* gridTiming.cpp */; };
 		F9FC290B1ADF02E0001B7023 /* animationWordsCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9FC29091ADF02E0001B7023 /* animationWordsCanvas.cpp */; };
 		F9FC290E1ADFC90D001B7023 /* dmxMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9FC290C1ADFC90D001B7023 /* dmxMap.cpp */; };
 		FB8AA9FA6535767BE31806BC /* ofxUIImageToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B848522CCA3A75ABD56752C9 /* ofxUIImageToggle.cpp */; };
@@ -416,8 +415,6 @@
 		F9FC28FD1ADE6474001B7023 /* animationWords.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = animationWords.cpp; sourceTree = "<group>"; };
 		F9FC28FE1ADE6474001B7023 /* animationWords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animationWords.h; sourceTree = "<group>"; };
 		F9FC29041ADE6F56001B7023 /* animWarmup.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = animWarmup.js; sourceTree = "<group>"; };
-		F9FC29051ADE9B12001B7023 /* gridTiming.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gridTiming.cpp; sourceTree = "<group>"; };
-		F9FC29061ADE9B12001B7023 /* gridTiming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gridTiming.h; sourceTree = "<group>"; };
 		F9FC29091ADF02E0001B7023 /* animationWordsCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = animationWordsCanvas.cpp; sourceTree = "<group>"; };
 		F9FC290A1ADF02E0001B7023 /* animationWordsCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animationWordsCanvas.h; sourceTree = "<group>"; };
 		F9FC290C1ADFC90D001B7023 /* dmxMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dmxMap.cpp; sourceTree = "<group>"; };
@@ -985,8 +982,6 @@
 				F9F7FB471AB08F73001CCE1E /* messageScrolling.h */,
 				F9FC28FD1ADE6474001B7023 /* animationWords.cpp */,
 				F9FC28FE1ADE6474001B7023 /* animationWords.h */,
-				F9FC29051ADE9B12001B7023 /* gridTiming.cpp */,
-				F9FC29061ADE9B12001B7023 /* gridTiming.h */,
 			);
 			name = animations;
 			sourceTree = "<group>";
@@ -1134,7 +1129,6 @@
 				F9704D961AA12DE200E2FD89 /* ofAppLog.cpp in Sources */,
 				E3D59A6B55F05669B3FBF8BD /* ofxUINumberDialer.cpp in Sources */,
 				D60E54E7FD6E19BC8636E0D2 /* ofxUIRadio.cpp in Sources */,
-				F9FC29071ADE9B12001B7023 /* gridTiming.cpp in Sources */,
 				1587708E3CAC72997E43504E /* ofxUIRangeSlider.cpp in Sources */,
 				F9704D8B1AA1294B00E2FD89 /* pixelFont.cpp in Sources */,
 				59C5F2F5D7254C33C00F97CB /* ofxUIRectangle.cpp in Sources */,

@@ -3,14 +3,14 @@
     <port>tty.usbserial-EN160423</port>
 </dmx>
 <animation>
-	<!--
-	<name>animBlinkLines.js</name>
-	<name>animWorm.js</name>
-	<name>animWorm2.js</name>
-	-->
+	<name>animPlasma.js</name>
 	<name>animPhare.js</name>
+	<name>animBlinkLines2.js</name>
+	<name>animWorm.js</name>
 </animation>
 <messages>
+	<!-- useful if we don't want to receive messages (to test animations for example)-->
+	<update>0</update>
 	<instalId>50</instalId>
 </messages>
 <warmup>

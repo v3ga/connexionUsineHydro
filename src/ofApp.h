@@ -35,25 +35,28 @@ class ofApp : public ofBaseApp{
 		animation*				mp_animationCurrent;
 		animation*				mp_animationWarmup;
 		animation*				mp_animationTransition;
+		vector<animation*>		m_animationTransition;
 		toolManager				m_toolManager;
 		rqMessageManager		m_rqMessageManager;
+		bool					m_bMessageManagerUpdate;
  
 
 		int						m_appState;
 		float					m_timeState;
 		float					m_timeWarmup;
 		bool					m_skipWarmup;
+		int						m_indexAnimTransition;
 
-		void					skipWarmup		(){m_skipWarmup=true;}
-		void					setAnimCurrent	(animation* pAnimation);
+		void					skipWarmup				(){m_skipWarmup=true;}
+		void					setAnimCurrent			(animation* pAnimation);
+		void					loadAnimationTransition	(string path);
 
  		enum
 		{
 			OFAPP_STATE_WARMP_UP			= 0,
 			OFAPP_STATE_SHOW_MSG			= 1,
 			OFAPP_STATE_SHOW_ANIMS			= 2,
-			OFAPP_STATE_SHOW_ANIMS_WAIT		= 3,
-			OFAPP_STATE_SHOW_MSG_TRANSITION = 4
+			OFAPP_STATE_SHOW_MSG_TRANSITION = 3
 		};
  
 		string					getStateAsString();

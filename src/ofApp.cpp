@@ -25,6 +25,25 @@ void ofApp::setAnimCurrent(animation* pAnimation)
 }
 
 //--------------------------------------------------------------
+void ofApp::loadAnimationTransition(string animScript)
+{
+   string pathScript = ofFilePath::getAbsolutePath("js/"+animScript, true);
+
+   animation* pAnimation = new animation(animScript);
+   setAnimCurrent(pAnimation); // for loadShader function
+   if (pAnimation->loadScript(pathScript.c_str()))
+   {
+	   pAnimation->setup();
+	   pAnimation->setGrid(&m_grid);
+
+	   m_animationTransition.push_back( pAnimation );
+	}
+	else{
+		delete pAnimation;
+	}
+}
+
+//--------------------------------------------------------------
 void ofApp::setup()
 {
 	GLOBALS->setApp(this);
@@ -62,13 +81,32 @@ void ofApp::setup()
 			mp_animationWarmup->setGrid(&m_grid);
 
 			// Transition
-			mp_animationTransition = new animation(animScript);
+			settings.pushTag("animation");
+
+			int nbAnims = settings.getNumTags("name");
+			OFAPPLOG->println( "nb animations transition="+ofToString(nbAnims) );
+			for (int i=0; i<nbAnims; i++ )
+			{
+				loadAnimationTransition( settings.getValue("name", "????", i) );
+			}
+
+//			loadAnimationTransition("animPhare.js");
+//			loadAnimationTransition("animBlinkLines2.js");
+
+			settings.popTag();
+
+			mp_animationTransition = 0;
+			m_indexAnimTransition = 0;
+			if (m_animationTransition.size()>0)
+				mp_animationTransition = m_animationTransition[0];
+			
+/*			mp_animationTransition = new animation(animScript);
 			setAnimCurrent(mp_animationTransition); // for loadShader function
 			string pathScript = ofFilePath::getAbsolutePath("js/"+animScript, true);
 			mp_animationTransition->loadScript(pathScript.c_str());
 			mp_animationTransition->setup();
 			mp_animationTransition->setGrid(&m_grid);
-
+*/
 
 			// Animation messages
 			mp_animation = new animationWords();
@@ -83,10 +121,12 @@ void ofApp::setup()
 			
 			// Messages
 			m_rqMessageManager.setURLRQInstallations("http://exhibitions.2roqs.com/");
-			m_rqMessageManager.setInstalId(50);
+			m_rqMessageManager.setInstalId( settings.getValue("messages:instalId", 50) );
 			m_rqMessageManager.setLog(true);
 			m_rqMessageManager.setPeriod(3.0, true);
 			m_rqMessageManager.setup();
+
+			m_bMessageManagerUpdate = settings.getValue("messages:update", 1) > 0 ? true : false;
 
 			GLOBALS->setRQMessageManager(&m_rqMessageManager);
 
@@ -122,7 +162,9 @@ void ofApp::exit()
 	m_toolManager.saveData();
 	delete mp_animation;
 	delete mp_animationWarmup;
-	delete mp_animationTransition;
+	for (int i=0;i<m_animationTransition.size();i++)
+		delete m_animationTransition[i];
+	m_animationTransition.clear();
 }
 
 //--------------------------------------------------------------
@@ -131,7 +173,8 @@ void ofApp::update()
 	float dt = ofGetLastFrameTime();
 	m_timeState += dt;
 
-//	m_rqMessageManager.update(dt);
+	if (m_bMessageManagerUpdate)
+		m_rqMessageManager.update(dt);
 	m_toolManager.update();
 
 	// State changes
@@ -152,7 +195,6 @@ void ofApp::update()
 		if (RQMESSAGES->getMessageNb() == 0 && !mp_animationCurrent->isActive())
 		{
 			 m_timeState = 0.0f;
-//			 m_appState = OFAPP_STATE_SHOW_ANIMS_WAIT;
 			 m_appState = OFAPP_STATE_SHOW_ANIMS;
 			 mp_animationTransition->setAlphaRectOver(1.0f);
 			 mp_animationTransition->setAlphaRectOverTarget(0.0f);
@@ -160,18 +202,6 @@ void ofApp::update()
 			 setAnimCurrent(mp_animationTransition);
 		}
 	}
-/*	else
-	if (m_appState == OFAPP_STATE_SHOW_ANIMS_WAIT)
-	{
-		// Wait before showing animation
-		if (m_timeState >= 5.0f)
-		{
-			m_timeState = 0.0f;
-			 m_appState = OFAPP_STATE_SHOW_ANIMS;
-			 setAnimCurrent(mp_animationTransition);
-		}
-	}
-*/
 	else
 	if (m_appState == OFAPP_STATE_SHOW_ANIMS)
 	{
@@ -179,14 +209,11 @@ void ofApp::update()
 		if (RQMESSAGES->getMessageNb()>0)
 		{
 			 m_timeState = 0.0f;
-//			 m_appState = OFAPP_STATE_SHOW_MSG;
 
 			 mp_animationTransition->setAlphaRectOver(0.0f);
 			 mp_animationTransition->setAlphaRectOverTarget(1.0f);
 
 			m_appState = OFAPP_STATE_SHOW_MSG_TRANSITION;
-
-//			 setAnimCurrent(mp_animation);
 		}
 	}
 	else
@@ -198,8 +225,6 @@ void ofApp::update()
 			setAnimCurrent(mp_animation);
 		}
 	}
-
-
 
 
 	if (mp_animationCurrent){
@@ -270,6 +295,20 @@ void ofApp::keyPressed(int key)
 				mp_animationCurrent->setup();
 			}
 		}
+		if (key == OF_KEY_LEFT)
+		{
+			m_indexAnimTransition = (m_indexAnimTransition+1)%m_animationTransition.size();
+			mp_animationTransition = m_animationTransition[m_indexAnimTransition];
+			setAnimCurrent(mp_animationTransition);
+		}
+		else
+		if (key == OF_KEY_RIGHT)
+		{
+			m_indexAnimTransition--;
+			if (m_indexAnimTransition<0) m_indexAnimTransition = m_animationTransition.size()-1;
+			mp_animationTransition = m_animationTransition[m_indexAnimTransition];
+			setAnimCurrent(mp_animationTransition);
+		}
 	}
 }
 
@@ -319,7 +358,6 @@ string ofApp::getStateAsString()
 	if (m_appState == OFAPP_STATE_WARMP_UP) return "Warm up";
 	if (m_appState == OFAPP_STATE_SHOW_MSG) return "Showing messages";
 	if (m_appState == OFAPP_STATE_SHOW_ANIMS) return "Showing animations";
-	if (m_appState == OFAPP_STATE_SHOW_ANIMS_WAIT) return "Showing animations (wait)";
 	if (m_appState == OFAPP_STATE_SHOW_MSG_TRANSITION) return "Transition to messages";
 
 	return "???";
