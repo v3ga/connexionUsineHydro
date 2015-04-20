@@ -3,6 +3,7 @@ Connexions
 
 
 ## Videos
+* [animMegaPulse.js](https://github.com/v3ga/connexionUsineHydro/blob/master/bin/data/js/animMegaPulse.js) in action here : 
 https://vine.co/v/ezFax9rYqJ0
 
 ## Images
