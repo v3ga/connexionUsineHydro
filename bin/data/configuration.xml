@@ -3,6 +3,7 @@
     <port>tty.usbserial-EN160423</port>
 </dmx>
 <animation>
+	<name>animMegaPulse.js</name>
 	<name>animPlasma.js</name>
 	<name>animPhare.js</name>
 	<name>animBlinkLines2.js</name>
