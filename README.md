@@ -1,6 +1,10 @@
 Connexions
 ======
 
+
+## Videos
+https://vine.co/v/ezFax9rYqJ0
+
 ## Images
 ![Hydroelectric plant](http://v3ga.github.io/Images/ofxJavascript/2015_Connexions_Petite_Poucette.jpeg)
 ![Interface](http://v3ga.github.io/Images/ofxJavascript/2015_Connexions_interface.png)
