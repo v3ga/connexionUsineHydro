@@ -252,7 +252,7 @@ void ofApp::draw()
 
 		m_gridView.draw(gridRect);
 
-
+		#if OFAPP_DRAW_DEBUG_GRID
 		if (mp_animationCurrent)
 		{
 			ofRectangle gridAnimOffscreen(0,gridRect.getY()+gridRect.getHeight()+10,ofGetWidth(),hRect);
@@ -261,7 +261,7 @@ void ofApp::draw()
 			ofRectangle gridOffscreen(0,gridAnimOffscreen.getY()+gridAnimOffscreen.getHeight()+10,ofGetWidth(),hRect);
 		     m_gridView.drawOffscreen(gridOffscreen);
 		}
-
+		#endif
 
 
 

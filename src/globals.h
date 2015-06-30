@@ -14,6 +14,7 @@
 #define APP GLOBALS->getApp()
 
 #define OFAPP_PATH_JS(file) ofFilePath::getAbsolutePath("js/file", true).c_str()
+#define OFAPP_DRAW_DEBUG_GRID	false
 
 class pixelFontManager;
 class rqMessageManager;

@@ -13,7 +13,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-toolGrid::toolGrid(toolManager* pParent) : tool("Grille",pParent)
+toolGrid::toolGrid(toolManager* pParent) : tool("Grid",pParent)
 {
 	mp_grid 			= 0;
 	mp_uiPlotterPower 	= 0;
@@ -31,7 +31,7 @@ void toolGrid::createControlsCustom()
 		float dim = 16;
 		int widthDefault = 320;
 
-	    mp_canvas->addWidgetDown( new ofxUILabel("Grille",OFX_UI_FONT_LARGE) );
+	    mp_canvas->addWidgetDown( new ofxUILabel("Grid",OFX_UI_FONT_LARGE) );
     	mp_canvas->addWidgetDown( new ofxUISpacer(widthDefault, 2) );
 
 		if (mp_grid)
